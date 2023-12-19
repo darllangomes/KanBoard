@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
-  static const routeName = '/register';
-  
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+  static const routeName = '/login';
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
 
+class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,11 +17,10 @@ class RegisterView extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               const Text.rich(TextSpan(children: [
                 TextSpan(
-                    text: 'Cadastro no ',
+                    text: 'Login no ',
                     style: TextStyle(
                         color: Color(0xFF7398C8),
                         fontWeight: FontWeight.w300,
@@ -32,25 +34,40 @@ class RegisterView extends StatelessWidget {
                         fontSize: 24))
               ])),
               const SizedBox(
-                height: 50,
+                height: 25,
               ),
-              const CustomTextField(
-                label: "Nome",
-                labelIcon: Icons.person,
+              const CustomTextField(label: 'Email', labelIcon: Icons.email),
+              const CustomTextField(label: 'Senha', labelIcon: Icons.password),
+              Container(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Stack(
+                    children: [
+                      const Text(
+                        'Esqueci minha senha',
+                        style: TextStyle(
+                          color: Color(0xFF7398C8),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 2,
+                        left: 8,
+                        right: 2,
+                        child: Container(
+                          height: 1,
+                          color: const Color(0xFF7398C8),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              const CustomTextField(
-                label: "Email",
-                labelIcon: Icons.email,
+              const SizedBox(
+                height: 10,
               ),
-              const CustomTextField(
-                label: "Senha",
-                labelIcon: Icons.password,
-              ),
-              const CustomTextField(
-                label: "Confirmar Senha",
-                labelIcon: Icons.password,
-              ),
-              const SizedBox(height: 20,),
               SizedBox(
                 height: 56,
                 width: 196,
@@ -60,13 +77,19 @@ class RegisterView extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {},
-                    child: Text("Cadastrar", style: TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.w300),)),
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300),
+                    )),
               ),
               const SizedBox(
                 height: 50,
               ),
               const Text(
-                'Já possui uma conta?',
+                'Não possui uma conta?',
                 style: TextStyle(
                     color: Color(0XFFD9D9D9),
                     fontSize: 20,
@@ -85,9 +108,9 @@ class RegisterView extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () =>
-                        Navigator.popAndPushNamed(context, '/login'),
+                        Navigator.popAndPushNamed(context, '/register'),
                     child: Text(
-                      "Login",
+                      "Cadastrar",
                       style: TextStyle(
                           color: AppColors.blue,
                           fontSize: 20,

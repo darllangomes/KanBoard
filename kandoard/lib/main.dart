@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/view/login_view.dart';
 import 'package:kandoard/view/register_view.dart';
 
 void main() {
@@ -19,7 +20,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         useMaterial3: true,
       ),
-      home: const RegisterView(),
+      initialRoute: LoginView.routeName,
+      routes: {
+        LoginView.routeName:(context) => const LoginView(),
+        RegisterView.routeName:(context) => const RegisterView(),
+      },
       
     );
   }

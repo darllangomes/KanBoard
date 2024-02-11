@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
+import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 class LoginView extends StatefulWidget {
@@ -12,6 +13,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
+    TextFieldController textFieldController = TextFieldController();
     return Scaffold(
       backgroundColor: AppColors.grey,
       body: Center(
@@ -36,8 +38,18 @@ class _LoginViewState extends State<LoginView> {
               const SizedBox(
                 height: 25,
               ),
-              const CustomTextField(label: 'Email', labelIcon: Icons.email),
-              const CustomTextField(label: 'Senha', labelIcon: Icons.password),
+              CustomTextField(
+                label: 'Email',
+                labelIcon: Icons.email,
+                keyboardInputType: TextInputType.emailAddress,
+                controller: textFieldController.emailController,
+              ),
+              CustomTextField(
+                label: 'Senha',
+                labelIcon: Icons.password,
+                isObscureText: true,
+                controller: textFieldController.passwordController,
+              ),
               Container(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -103,7 +115,7 @@ class _LoginViewState extends State<LoginView> {
                 width: 196,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: AppColors.grey,
                         side: BorderSide(color: AppColors.blue),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
+import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
   static const routeName = '/register';
-  
 
   @override
   Widget build(BuildContext context) {
+    final TextFieldController textFieldController = TextFieldController();
+
     return Scaffold(
       backgroundColor: AppColors.grey,
       body: Center(
@@ -34,23 +36,33 @@ class RegisterView extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const CustomTextField(
+              CustomTextField(
                 label: "Nome",
                 labelIcon: Icons.person,
+                keyboardInputType: TextInputType.name,
+                controller: textFieldController.genericTextController,
               ),
-              const CustomTextField(
+              CustomTextField(
                 label: "Email",
                 labelIcon: Icons.email,
+                keyboardInputType: TextInputType.emailAddress,
+                controller: textFieldController.emailController,
               ),
-              const CustomTextField(
+              CustomTextField(
                 label: "Senha",
                 labelIcon: Icons.password,
+                isObscureText: true,
+                controller: textFieldController.passwordController,
               ),
-              const CustomTextField(
+              CustomTextField(
                 label: "Confirmar Senha",
                 labelIcon: Icons.password,
+                isObscureText: true,
+                controller: textFieldController.emailController,
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 height: 56,
                 width: 196,
@@ -59,8 +71,20 @@ class RegisterView extends StatelessWidget {
                         backgroundColor: AppColors.blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
-                    onPressed: () {},
-                    child: Text("Cadastrar", style: TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.w300),)),
+                    onPressed: () async {
+                      print("pressed");
+                      String nome = textFieldController.getGenericTextFromTextField();
+                      String email = textFieldController.getEmailFromTextField();
+                      String senha = textFieldController.getPasswordFromTextField();
+                      print("$nome, $email, $senha");
+                    },
+                    child: Text(
+                      "Cadastrar",
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300),
+                    )),
               ),
               const SizedBox(
                 height: 50,
@@ -80,7 +104,7 @@ class RegisterView extends StatelessWidget {
                 width: 196,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: AppColors.grey,
                         side: BorderSide(color: AppColors.blue),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),

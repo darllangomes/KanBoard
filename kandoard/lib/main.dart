@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/view/login_view.dart';
@@ -7,9 +8,15 @@ import 'package:kandoard/view/register_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(create: (context) => ProjectRepository(),
-    child: const MyApp()));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => ProjectRepository(),
+      ),
+      ChangeNotifierProvider(create: (context) => TextFieldController())
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,17 +29,15 @@ class MyApp extends StatelessWidget {
       title: 'KanBoard',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         useMaterial3: true,
       ),
       initialRoute: LoginView.routeName,
       routes: {
-        LoginView.routeName:(context) => const LoginView(),
-        RegisterView.routeName:(context) => const RegisterView(),
-        ProjectsView.routeName:(context) => const ProjectsView()
+        LoginView.routeName: (context) => const LoginView(),
+        RegisterView.routeName: (context) => const RegisterView(),
+        ProjectsView.routeName: (context) => const ProjectsView()
       },
-      
     );
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/model/ProjectModel.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 // ignore: must_be_immutable
 class ProjectCard extends StatelessWidget {
   String projectName;
+  final ProjectModel cardContent;
 
-  ProjectCard({super.key, required this.projectName});
+  ProjectCard({super.key, required this.projectName, required this.cardContent});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,7 @@ class ProjectCard extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          //TODO: ir para o quadro kanban do projeto
-          print('tocado');
+          Navigator.popAndPushNamed(context, '/kanban', arguments: cardContent);
         },
         child: SizedBox(
             width: 375,

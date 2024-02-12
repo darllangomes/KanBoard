@@ -73,6 +73,7 @@ class ProjectsView extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 50),
                       child: ProjectCard(
                         projectName: value.getProjectList[index].nameProject,
+                        cardContent: value.getProjectList[index],
                       ),
                     );
                   },
@@ -93,7 +94,7 @@ class ProjectsView extends StatelessWidget {
           return AlertDialog(
               backgroundColor: AppColors.grey,
               title: const Text(
-                'Criar Projeto',
+                'Criar Novo Projeto',
                 style: TextStyle(color: Color(0xFF7398C8)),
               ),
               content: SizedBox(
@@ -113,7 +114,7 @@ class ProjectsView extends StatelessWidget {
                             labelText: 'Nome do Projeto',
                             labelStyle: TextStyle(
                               color: AppColors.blue,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.w300,
                             ),
                             border: OutlineInputBorder(
@@ -148,7 +149,7 @@ class ProjectsView extends StatelessWidget {
                                   if (nameProjectInput.text.isEmpty) {
                                     
                                     errorLabel
-                                        .setErrorMenssage('Digite um nome');
+                                        .setErrorMenssage('Digite um nome para o projeto');
                                   } else {
                                     final projectsList =
                                         context.read<ProjectRepository>();

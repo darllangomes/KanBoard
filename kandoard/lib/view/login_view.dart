@@ -102,6 +102,7 @@ class _LoginViewState extends State<LoginView> {
                 height: 56,
                 width: 196,
                 child: ElevatedButton(
+                  key: const Key('botaoCadastro'),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         side: BorderSide(color: AppColors.blue),

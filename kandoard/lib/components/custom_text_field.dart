@@ -6,7 +6,7 @@ import 'package:kandoard/shared/app_colors.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final IconData labelIcon;
-  TextInputType keyboardInputType ;
+  TextInputType keyboardInputType;
   final bool isObscureText;
   final TextEditingController controller;
 
@@ -21,11 +21,9 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(left: 26.0, right: 26, top: 15, bottom: 15),
+      padding: const EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
       child: TextFormField(
         onChanged: (text) {
-          print(text);
         },
         obscureText: isObscureText,
         keyboardType: keyboardInputType,

@@ -5,7 +5,6 @@ import 'package:kandoard/shared/app_colors.dart';
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
   static const routeName = '/register';
-  
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,9 @@ class RegisterView extends StatelessWidget {
                 label: "Confirmar Senha",
                 labelIcon: Icons.password,
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 height: 56,
                 width: 196,
@@ -60,7 +61,13 @@ class RegisterView extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {},
-                    child: Text("Cadastrar", style: TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.w300),)),
+                    child: Text(
+                      "Cadastrar",
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300),
+                    )),
               ),
               const SizedBox(
                 height: 50,
@@ -79,6 +86,7 @@ class RegisterView extends StatelessWidget {
                 height: 56,
                 width: 196,
                 child: ElevatedButton(
+                    key: const Key('botaoLogin'),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         side: BorderSide(color: AppColors.blue),

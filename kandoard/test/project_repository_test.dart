@@ -5,7 +5,7 @@ void main() {
   test('Project list should be incremented', (){
     final projectList = ProjectRepository();
 
-    projectList.addProject(ProjectModel('Novo Projeto'));
+    projectList.addProject(ProjectModel('Novo Projeto', 1));
 
     expect(projectList.getProjectList.length, 2);
   });

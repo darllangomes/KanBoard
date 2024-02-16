@@ -46,7 +46,9 @@ class _LoginViewState extends State<LoginView> {
                   keyboardInputType: TextInputType.emailAddress,
                   controller: textFieldController.emailController,
                 ),
-                const SizedBox(height: 26,),
+                const SizedBox(
+                  height: 26,
+                ),
                 CustomTextField(
                   label: 'Senha',
                   labelIcon: Icons.password,

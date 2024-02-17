@@ -4,10 +4,10 @@ import '../model/workspace_model.dart';
 
 class ProjectRepository extends ChangeNotifier {
   //TODO: criar lógica para quando lista estiver vazia
-  late List<ProjectModel> _projectList = [ProjectModel('Sirene',1)];
-  List<ProjectModel> get getProjectList => _projectList;
+  late List<WorkspaceModel> _projectList = [WorkspaceModel('Sirene',1)];
+  List<WorkspaceModel> get getProjectList => _projectList;
 
-  void addProject(ProjectModel project) {
+  void addProject(WorkspaceModel project) {
     _projectList.add(project);
     notifyListeners();
   }

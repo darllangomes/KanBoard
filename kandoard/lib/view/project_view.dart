@@ -12,7 +12,7 @@ class KanbanBoardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projectCard =
-        ModalRoute.of(context)!.settings.arguments as ProjectModel;
+        ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
 
     return Scaffold(
       backgroundColor: AppColors.grey,

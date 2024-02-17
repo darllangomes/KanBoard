@@ -156,7 +156,7 @@ class ProjectsView extends StatelessWidget {
                                     errorLabel.setErrorMenssage('');
 
                                     projectsList.addProject(
-                                        ProjectModel(nameProjectInput.text, 2));
+                                        WorkspaceModel(nameProjectInput.text, 2));
 
                                     Navigator.of(context).pop();
                                   }

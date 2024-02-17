@@ -5,7 +5,7 @@ import 'package:kandoard/shared/app_colors.dart';
 // ignore: must_be_immutable
 class ProjectCard extends StatelessWidget {
   String projectName;
-  final ProjectModel cardContent;
+  final WorkspaceModel cardContent;
 
   ProjectCard({super.key, required this.projectName, required this.cardContent});
 

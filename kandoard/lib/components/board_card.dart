@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 // ignore: must_be_immutable
-class ProjectCard extends StatelessWidget {
-  String projectName;
-  final ProjectModel cardContent;
+class BoardCart extends StatelessWidget {
+  String boardName;
+  final BoardModel cardContent;
 
-  ProjectCard({super.key, required this.projectName, required this.cardContent});
+  BoardCart({super.key, required this.boardName, required this.cardContent});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ProjectCard extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/kanban', arguments: cardContent);
+          Navigator.pushNamed(context, '/board', arguments: cardContent);
         },
         child: SizedBox(
             width: 375,
@@ -35,12 +35,23 @@ class ProjectCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    projectName,
-                    style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w200),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Board: ',
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w200),
+                      ),
+                      Text(
+                        boardName,
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    ],
                   ),
                 ),
               ],

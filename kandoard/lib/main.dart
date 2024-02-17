@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/repositories/ProjectRepository.dart';
+import 'package:kandoard/repositories/board_repository.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/view/board_view.dart';
 import 'package:kandoard/view/kanban_board_view.dart';
 import 'package:kandoard/view/login_view.dart';
 import 'package:kandoard/view/projects_view.dart';
@@ -14,7 +16,10 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => ProjectRepository(),
       ),
-      ChangeNotifierProvider(create: (context) => TextFieldController())
+      ChangeNotifierProvider(create: (context) => TextFieldController()),
+      ChangeNotifierProvider(
+        create: (context) => BoardRepository(),
+      )
     ],
     child: const MyApp(),
   ));
@@ -39,6 +44,7 @@ class MyApp extends StatelessWidget {
         RegisterView.routeName: (context) => const RegisterView(),
         ProjectsView.routeName: (context) => const ProjectsView(),
         KanbanBoardView.routeName: (context) => const KanbanBoardView(),
+        Board.routeName:(context) => const Board(),
       },
     );
   }

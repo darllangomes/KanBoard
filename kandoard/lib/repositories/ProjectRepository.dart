@@ -4,7 +4,7 @@ import '../model/ProjectModel.dart';
 
 class ProjectRepository extends ChangeNotifier {
   //TODO: criar lógica para quando lista estiver vazia
-  late List<ProjectModel> _projectList = [ProjectModel('Sirene')];
+  late List<ProjectModel> _projectList = [ProjectModel('Sirene',1)];
   List<ProjectModel> get getProjectList => _projectList;
 
   void addProject(ProjectModel project) {

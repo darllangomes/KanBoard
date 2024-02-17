@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
+import 'package:kandoard/http/login_http.dart';
+import 'package:kandoard/model/user_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 class LoginView extends StatefulWidget {
@@ -50,7 +54,9 @@ class _LoginViewState extends State<LoginView> {
                     controller: textFieldController.emailController,
                     errorLabel: 'Digite seu email',
                   ),
-                  const SizedBox(height: 26,),
+                  const SizedBox(
+                    height: 26,
+                  ),
                   CustomTextField(
                     label: 'Senha',
                     labelIcon: Icons.password,
@@ -62,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/projetos');
+                        
                       },
                       child: Stack(
                         children: [
@@ -98,9 +104,35 @@ class _LoginViewState extends State<LoginView> {
                             backgroundColor: AppColors.blue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {
-                          if(_LoginformKey.currentState!.validate()) {
-                            print('login');
+                        onPressed: () async {
+                          if (_LoginformKey.currentState!.validate()) {
+                            String email =
+                                textFieldController.getEmailFromTextField();
+                            String senha =
+                                textFieldController.getPasswordFromTextField();
+
+                            LoginStatus(context, 'Conectando...');
+                            String loginStatus = await loginUser(
+                                userEmail: email, userPassword: senha);
+
+                            if (loginStatus.isNotEmpty) {
+                              if (context.mounted) {
+                                if (loginStatus == 'Login') {
+                                 
+                                  Navigator.popAndPushNamed(
+                                      context, '/projetos');
+                                } else {
+                                  LoginStatus(context, loginStatus);
+                                  Timer timer =
+                                      Timer(Duration(milliseconds: 3500), () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop();
+                                    Navigator.popAndPushNamed(
+                                        context, '/login');
+                                  });
+                                }
+                              }
+                            }
                           }
                         },
                         child: Text(
@@ -150,5 +182,20 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  //TODO: separar esse widget em outra página
+  Future<void> LoginStatus(BuildContext context, String message) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              backgroundColor: AppColors.grey,
+              title: Text(
+                message.toString(),
+                style: TextStyle(color: Color(0xFF7398C8)),
+              ));
+        });
   }
 }

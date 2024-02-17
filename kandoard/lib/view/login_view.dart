@@ -45,6 +45,7 @@ class _LoginViewState extends State<LoginView> {
                   labelIcon: Icons.email,
                   keyboardInputType: TextInputType.emailAddress,
                   controller: textFieldController.emailController,
+                  errorLabel: 'Digite seu email',
                 ),
                 const SizedBox(
                   height: 26,
@@ -54,6 +55,7 @@ class _LoginViewState extends State<LoginView> {
                   labelIcon: Icons.password,
                   isObscureText: true,
                   controller: textFieldController.passwordController,
+                  errorLabel: 'Digite sua senha',
                 ),
                 Container(
                   alignment: Alignment.centerRight,

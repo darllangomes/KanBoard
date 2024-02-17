@@ -59,5 +59,6 @@ This is a repository from discipline of Agile - UFRPE - Brazil
 + web_socket_channel 2.4.0 (2.4.3 available)
 + webkit_inspection_protocol 1.2.1
 + yaml 3.1.2
++ dio 5.4.0
 
 ## Colaboradores

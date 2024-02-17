@@ -185,6 +185,7 @@ class RegisterViewState extends State<RegisterView> {
     );
   }
 
+  //TODO: separar esse widget em outra página
   Future<void> RegisterStatus(BuildContext context, String message) {
     return showDialog(
         context: context,

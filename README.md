@@ -60,5 +60,6 @@ This is a repository from discipline of Agile - UFRPE - Brazil
 + webkit_inspection_protocol 1.2.1
 + yaml 3.1.2
 + dio 5.4.0
++ jwt_decoder 2.0.1
 
 ## Colaboradores

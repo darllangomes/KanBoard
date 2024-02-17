@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/repositories/board_repository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';

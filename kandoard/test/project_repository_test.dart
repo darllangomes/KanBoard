@@ -1,4 +1,4 @@
-import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:test/test.dart';
 void main() {

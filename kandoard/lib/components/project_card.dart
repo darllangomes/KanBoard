@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 // ignore: must_be_immutable

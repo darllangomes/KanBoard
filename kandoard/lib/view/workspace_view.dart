@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/project_card.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';

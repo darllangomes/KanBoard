@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/ProjectModel.dart';
+import '../model/workspace_model.dart';
 
 class ProjectRepository extends ChangeNotifier {
   //TODO: criar lógica para quando lista estiver vazia

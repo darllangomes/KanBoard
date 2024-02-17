@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class ProjectsView extends StatelessWidget {
   const ProjectsView({super.key});
-  static const routeName = '/projetos';
+  static const routeName = '/workspace';
 
   @override
   Widget build(BuildContext context) {

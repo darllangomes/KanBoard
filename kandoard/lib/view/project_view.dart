@@ -52,7 +52,7 @@ class KanbanBoardView extends StatelessWidget {
                 ),
                 IconButton(
                   color: Colors.orangeAccent,
-                  onPressed: () => addBoardModal(context),
+                  onPressed: () => addBoardDialog(context),
                   icon: const Icon(Icons.add_box_outlined),
                 ),
               ],

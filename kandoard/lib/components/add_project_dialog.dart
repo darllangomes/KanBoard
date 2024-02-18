@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/board_model.dart';
-import 'package:kandoard/repositories/board_repository.dart';
+import 'package:kandoard/model/ProjectModel.dart';
+import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addBoardDialog(BuildContext context) {
-  final nameBoard = TextEditingController();
-  final boardDescription = TextEditingController();
+Future<void> addProjectDialog(BuildContext context) {
+  final projectBoard = TextEditingController();
+  final projectDescription = TextEditingController();
   return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
           title: const Text(
-            'Criar Novo Quadro',
+            'Criar Novo Projeto',
             style: TextStyle(color: Color(0xFF7398C8)),
           ),
           content: Column(
@@ -27,12 +27,12 @@ Future<void> addBoardDialog(BuildContext context) {
                   children: [
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: nameBoard,
+                      controller: projectBoard,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput.isEmpty
                             ? null
                             : errorValue.errorInput,
-                        labelText: 'Nome do quadro',
+                        labelText: 'Nome do Projeto',
                         labelStyle: TextStyle(
                           color: AppColors.blue,
                           fontSize: 16,
@@ -47,7 +47,7 @@ Future<void> addBoardDialog(BuildContext context) {
                     ),
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: boardDescription,
+                      controller: projectDescription,
                       decoration: InputDecoration(
                         labelText: 'Descrição',
                         labelStyle: TextStyle(
@@ -86,15 +86,16 @@ Future<void> addBoardDialog(BuildContext context) {
                         onPressed: () {
                           final errorLabel =
                               context.read<TextFieldController>();
-                          if (nameBoard.text.isEmpty) {
+                          if (projectBoard.text.isEmpty) {
                             errorLabel.setErrorMenssage(
-                                'Digite um nome para o quadro');
+                                'Digite um nome para o Projeto');
                           } else {
-                            final boardList = context.read<BoardRepository>();
+                            final projectList =
+                                context.read<ProjectRepository>();
                             errorLabel.setErrorMenssage('');
 
-                            boardList
-                                .addBoard(BoardModel(nameBoard.text, 1, 1));
+                            projectList
+                                .addProject(ProjectModel(projectBoard.text, 1));
 
                             Navigator.of(context).pop();
                           }

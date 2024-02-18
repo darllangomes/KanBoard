@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/model/ProjectModel.dart';
 import 'package:kandoard/repositories/board_repository.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -51,7 +52,7 @@ class KanbanBoardView extends StatelessWidget {
                 ),
                 IconButton(
                   color: Colors.orangeAccent,
-                  onPressed: () {},
+                  onPressed: () => addBoardModal(context),
                   icon: const Icon(Icons.add_box_outlined),
                 ),
               ],

@@ -24,14 +24,16 @@ class KanbanBoardView extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back)),
         actionsIconTheme: IconThemeData(),
-        title: Text(
+        title: Center(
+            child: Text(
           projectCard.nameProject,
           style: const TextStyle(
               color: Color(0xFFD9D9D9),
               fontSize: 24,
               fontWeight: FontWeight.w200,
               fontStyle: FontStyle.italic),
-        ),
+        )),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.menu))],
         backgroundColor: AppColors.blue,
       ),
       body: Padding(
@@ -39,18 +41,22 @@ class KanbanBoardView extends StatelessWidget {
         child: Center(
             child: Column(
           children: [
-            const Row(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'test',
-                  style: TextStyle(color: Colors.white),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.person_add_alt_1_outlined),
+                  label: const Text('Adicionar participantes'),
                 ),
-                Text(
-                  'test',
-                  style: TextStyle(color: Colors.white),
+                IconButton(
+                  color: Colors.orangeAccent,
+                  onPressed: () {},
+                  icon: const Icon(Icons.add_box_outlined),
                 ),
               ],
             ),
+            const SizedBox(height: 20),
             Consumer<BoardRepository>(builder: (context, value, child) {
               return Expanded(
                 child: ListView.builder(

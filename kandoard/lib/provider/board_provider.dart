@@ -7,8 +7,9 @@ class BoardProvider extends ChangeNotifier{
   List<BoardModel> _boards = [];
   List<BoardModel> get getBoards => _boards;
 
-  Future<void> getUserBoards() async {
-    final response = await _boardService.boardGetAll();
+  Future<void> getUserBoards(String workspaceId) async {
+    final response = await _boardService.boardGetAll(workspaceId: workspaceId);
+    _boards = response;
     notifyListeners();
   }
 }

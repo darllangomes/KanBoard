@@ -6,13 +6,13 @@ import '../model/user_model.dart';
 class BoardService {
   final dio = Dio();
 
-  Future<List<BoardModel>> boardGetAll() async {
+  Future<List<BoardModel>> boardGetAll({required String workspaceId}) async {
     dio.options.headers['Authorization'] =
         "Bearer ${UserLogged.first.getUserId}";
 
     try {
 
-       final response = await dio.get('https://kanbanboard-nj8m.onrender.com/api/board');
+       final response = await dio.get('https://kanbanboard-nj8m.onrender.com/api/board?workspaceId=$workspaceId');
        List<BoardModel> boards = [];
        response.data.map((item) {
         final board = BoardModel.fromJson(item);

@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/model/workspace_model.dart';
+import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:provider/provider.dart';
 import '../components/board_card.dart';
 
-class WorkspaceView extends StatelessWidget {
+class WorkspaceView extends StatefulWidget {
   const WorkspaceView({super.key});
   static const routeName = '/workspace';
 
   @override
+  WorkspaceViewState createState() {
+    return WorkspaceViewState();
+  }
+}
+
+class WorkspaceViewState extends State<WorkspaceView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final workspace = ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
+      Provider.of<BoardProvider>(context, listen: false).getUserBoards(workspace.getWorkspaceId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final workspaceName = ModalRoute.of(context)!.settings.arguments as String;
+    final workspace = ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
 
     return Scaffold(
       backgroundColor: AppColors.grey,
@@ -21,7 +42,7 @@ class WorkspaceView extends StatelessWidget {
             icon: const Icon(Icons.arrow_back)),
         actionsIconTheme: IconThemeData(),
         title: Text(
-          workspaceName,
+          workspace.getWorkspaceName,
           style: const TextStyle(
               color: Color(0xFFD9D9D9),
               fontSize: 24,
@@ -45,19 +66,28 @@ class WorkspaceView extends StatelessWidget {
                         backgroundColor: AppColors.blue),
                     child: Row(
                       children: [
-                        Icon(Icons.person_add_alt_1, color: AppColors.grey,),
+                        Icon(
+                          Icons.person_add_alt_1,
+                          color: AppColors.grey,
+                        ),
                         const SizedBox(
                           width: 5,
                         ),
                         Text(
                           'Adicionar participantes',
-                          style: TextStyle(color: AppColors.grey, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              color: AppColors.grey,
+                              fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      print('Adicionar Participante');
+                    }),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print('Adicionar novo board');
+                    },
                     icon: Icon(
                       Icons.add_box_outlined,
                       color: AppColors.blue,
@@ -65,28 +95,23 @@ class WorkspaceView extends StatelessWidget {
                     )),
               ],
             ),
-            const SizedBox(height: 42,),
-            BoardCard(boardName: 'Teste'),
-            // Consumer<BoardRepository>(builder: (context, value, child) {
-            //   return Expanded(
-            //     child: ListView.builder(
-            //       itemCount: value.getBoardList(projectCard.projectId).length,
-            //       itemBuilder: (context, index) {
-            //         return Padding(
-            //           padding: const EdgeInsets.only(bottom: 50),
-            //           child: BoardCart(
-            //             boardName: value
-            //                 .getBoardList(projectCard.projectId)[index]
-            //                 .getBoardName,
-            //             cardContent:
-            //                 value.getBoardList(projectCard.projectId)[index],
-            //           ),
-            //         );
-            //       },
-            //     ),
-            //   );
-            // }),
-
+            const SizedBox(
+              height: 42,
+            ),
+            
+            Consumer<BoardProvider>(builder: (context, value, child) {
+              final boards = value.getBoards;
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: boards.length, itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 40),
+                        child: BoardCard(boardName: boards[index].getBoardName),
+                      );
+                    }),
+              );
+            })
+           
           ],
         )),
       ),

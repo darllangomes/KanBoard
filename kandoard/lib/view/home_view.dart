@@ -93,7 +93,7 @@ class HomeViewState extends State<HomeView>   {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 50),
                       child: WorkspaceCard(
-                        workspaceName: workspace[index].workspaceName,
+                        workspace: workspace[index],
                        
                       ),
                     );

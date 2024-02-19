@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/model/board_model.dart';
+import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 
 // ignore: must_be_immutable
 class WorkspaceCard extends StatelessWidget {
-  String workspaceName;
-  WorkspaceCard({super.key, required this.workspaceName});
+
+  WorkspaceModel workspace;
+  WorkspaceCard({super.key, required this.workspace});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class WorkspaceCard extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/workspace', arguments: workspaceName);
+          Navigator.pushNamed(context, '/workspace', arguments: workspace);
         },
         child: SizedBox(
             width: 375,
@@ -35,7 +36,7 @@ class WorkspaceCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    workspaceName,
+                    workspace.getWorkspaceName,
                     style: TextStyle(
                         color: AppColors.white,
                         fontSize: 20,

@@ -11,8 +11,8 @@ class WorkspaceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final projectCard =
-    //     ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
+    final workspaceName =
+        ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
       backgroundColor: AppColors.grey,
@@ -25,7 +25,7 @@ class WorkspaceView extends StatelessWidget {
             icon: const Icon(Icons.arrow_back)),
         actionsIconTheme: IconThemeData(),
         title: Text(
-          'projectCard.nameProject',
+          workspaceName,
           style: const TextStyle(
               color: Color(0xFFD9D9D9),
               fontSize: 24,
@@ -50,7 +50,7 @@ class WorkspaceView extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ],
-            ),
+            ), BoardCard(boardName: 'Teste'),
             // Consumer<BoardRepository>(builder: (context, value, child) {
             //   return Expanded(
             //     child: ListView.builder(
@@ -71,7 +71,9 @@ class WorkspaceView extends StatelessWidget {
             //   );
             // }),
 
-          Text('Conteundo')
+            
+
+          Text('Conteudo')
 
           ],
         )),

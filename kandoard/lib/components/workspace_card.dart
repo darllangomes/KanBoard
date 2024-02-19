@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/model/workspace_model.dart';
+import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
-// ignore: must_be_immutable
-class ProjectCard extends StatelessWidget {
-  String projectName;
-  final WorkspaceModel cardContent;
 
-  ProjectCard({super.key, required this.projectName, required this.cardContent});
+// ignore: must_be_immutable
+class WorkspaceCard extends StatelessWidget {
+  String projectName;
+  final BoardModel cardContent;
+
+  WorkspaceCard({super.key, required this.projectName, required this.cardContent});
 
   @override
   Widget build(BuildContext context) {

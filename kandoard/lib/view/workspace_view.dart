@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/components/project_card.dart';
+import 'package:kandoard/components/workspace_card.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/workspace_model.dart';
-import 'package:kandoard/repositories/ProjectRepository.dart';
+import 'package:kandoard/model/board_model.dart';
+import 'package:kandoard/provider/workspace_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-class ProjectsView extends StatelessWidget {
-  const ProjectsView({super.key});
+class WorkspaceView extends StatefulWidget {
+  const WorkspaceView({super.key});
   static const routeName = '/workspace';
+
+  @override
+  WorkspaceViewState createState() {
+    return WorkspaceViewState();
+  }
+
+}
+
+class WorkspaceViewState extends State<WorkspaceView>   {
+
+  @override
+  void initState(){
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<WorkspaceProvider>(context, listen: false).getUserWorkspace();
+    });
+    
+
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -63,23 +83,26 @@ class ProjectsView extends StatelessWidget {
                     })),
             const SizedBox(
               height: 56,
-            ),
-            Consumer<ProjectRepository>(builder: (context, value, child) {
+            ), 
+
+            Consumer<WorkspaceProvider>(builder: (context, value, child) {
+              final workspace = value.getWorkspace;
               return Expanded(
                 child: ListView.builder(
-                  itemCount: value.getProjectList.length,
+                  itemCount: workspace.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 50),
-                      child: ProjectCard(
-                        projectName: value.getProjectList[index].nameProject,
-                        cardContent: value.getProjectList[index],
+                      child: WorkspaceCard(
+                        projectName: workspace[index].workspaceName,
+                        cardContent: BoardModel('test', 'teste2', 'test3') // aqui está o problema
                       ),
                     );
                   },
                 ),
               );
             })
+
           ],
         )),
       ),
@@ -143,7 +166,7 @@ class ProjectsView extends StatelessWidget {
                                         fontWeight: FontWeight.w300),
                                   ),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   final errorLabel =
                                       context.read<TextFieldController>();
                                   if (nameProjectInput.text.isEmpty) {
@@ -152,12 +175,11 @@ class ProjectsView extends StatelessWidget {
                                         .setErrorMenssage('Digite um nome para o projeto');
                                   } else {
                                     final projectsList =
-                                        context.read<ProjectRepository>();
+                                        context.read<WorkspaceProvider>();
                                     errorLabel.setErrorMenssage('');
 
-                                    projectsList.addProject(
-                                        WorkspaceModel(nameProjectInput.text, 2));
-
+                                    projectsList.addBoardToWorkspace(nameProjectInput.text);
+                                    
                                     Navigator.of(context).pop();
                                   }
                                 })),

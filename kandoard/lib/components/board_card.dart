@@ -23,7 +23,7 @@ class BoardCard extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/kanban',);
+          Navigator.pushNamed(context, '/kanban', arguments: boardName);
         },
         child: SizedBox(
             width: 375,

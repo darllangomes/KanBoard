@@ -13,7 +13,7 @@ class KanbanBoardView extends StatefulWidget {
 class _KanbanBoardState extends State<KanbanBoardView> {
   @override
   Widget build(BuildContext context) {
-    final boardCard = ModalRoute.of(context)!.settings.arguments as BoardModel;
+    final boardCard = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         backgroundColor: AppColors.grey,
         appBar: AppBar(
@@ -25,7 +25,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
               icon: const Icon(Icons.arrow_back)),
           actionsIconTheme: IconThemeData(),
           title: Text(
-            boardCard.getBoardName,
+            boardCard,
             style: const TextStyle(
                 color: Color(0xFFD9D9D9),
                 fontSize: 24,

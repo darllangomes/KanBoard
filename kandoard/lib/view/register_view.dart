@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
-import '../http/register_http.dart';
+import '../services/register_service.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});

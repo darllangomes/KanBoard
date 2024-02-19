@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/http/workspace_service.dart';
+import 'package:kandoard/services/workspace_service.dart';
 import 'package:kandoard/model/workspace_model.dart';
 
 class WorkspaceProvider extends ChangeNotifier {

@@ -1,4 +1,4 @@
-import 'package:kandoard/http/workspace_service.dart';
+import 'package:kandoard/services/workspace_service.dart';
 import 'package:test/test.dart';
 void main() {
   test('Project list should be incremented', (){

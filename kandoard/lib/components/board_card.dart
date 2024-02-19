@@ -3,11 +3,11 @@ import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 // ignore: must_be_immutable
-class BoardCart extends StatelessWidget {
+class BoardCard extends StatelessWidget {
   String boardName;
   final BoardModel cardContent;
 
-  BoardCart({super.key, required this.boardName, required this.cardContent});
+  BoardCard({super.key, required this.boardName, required this.cardContent});
 
   @override
   Widget build(BuildContext context) {

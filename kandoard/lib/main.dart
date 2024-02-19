@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/provider/workspace_provider.dart';
-import 'package:kandoard/repositories/board_repository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/view/kanban_board_view.dart';
 import 'package:kandoard/view/workspace_view.dart';
@@ -15,9 +14,6 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => TextFieldController()),
-      ChangeNotifierProvider(
-        create: (context) => BoardRepository(),
-      ),
       ChangeNotifierProvider(create: (context) => WorkspaceProvider()),
       ChangeNotifierProvider(create: (context) => BoardProvider())
     ],

@@ -6,9 +6,9 @@ import 'package:kandoard/shared/app_colors.dart';
 // ignore: must_be_immutable
 class WorkspaceCard extends StatelessWidget {
   String projectName;
-  final BoardModel cardContent;
+  // final BoardModel cardContent;
 
-  WorkspaceCard({super.key, required this.projectName, required this.cardContent});
+  WorkspaceCard({super.key, required this.projectName});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class WorkspaceCard extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/kanban', arguments: cardContent);
+          Navigator.pushNamed(context, '/workspace', );
         },
         child: SizedBox(
             width: 375,

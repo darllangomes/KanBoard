@@ -120,7 +120,7 @@ class _LoginViewState extends State<LoginView> {
                                 if (loginStatus == 'Login') {
                                  
                                   Navigator.popAndPushNamed(
-                                      context, '/workspace');
+                                      context, '/home');
                                 } else {
                                   LoginStatus(context, loginStatus);
                                   Timer timer =

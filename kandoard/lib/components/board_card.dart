@@ -24,7 +24,7 @@ class BoardCart extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/board', arguments: cardContent);
+          Navigator.pushNamed(context, '/kanban', arguments: cardContent);
         },
         child: SizedBox(
             width: 375,

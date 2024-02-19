@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
-class Board extends StatefulWidget {
-  const Board({super.key});
-  static const routeName = '/board';
+class KanbanBoardView extends StatefulWidget {
+  const KanbanBoardView({super.key});
+  static const routeName = '/kanban';
 
   @override
-  State<Board> createState() => _BoardState();
+  State<KanbanBoardView> createState() => _KanbanBoardState();
 }
 
-class _BoardState extends State<Board> {
+class _KanbanBoardState extends State<KanbanBoardView> {
   @override
   Widget build(BuildContext context) {
     final boardCard = ModalRoute.of(context)!.settings.arguments as BoardModel;

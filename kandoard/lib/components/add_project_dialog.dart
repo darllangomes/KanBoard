@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/ProjectModel.dart';
-import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addProjectDialog(BuildContext context) {
+import '../provider/workspace_provider.dart';
+
+Future<void> addProjectDialog(BuildContext context, String workspaceName) {
   final projectBoard = TextEditingController();
   final projectDescription = TextEditingController();
   return showDialog(
@@ -90,12 +90,11 @@ Future<void> addProjectDialog(BuildContext context) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para o Projeto');
                           } else {
-                            final projectList =
-                                context.read<ProjectRepository>();
-                            errorLabel.setErrorMenssage('');
+                            final projectsList =
+                                        context.read<WorkspaceProvider>();
+                                    errorLabel.setErrorMenssage('');
 
-                            projectList
-                                .addProject(ProjectModel(projectBoard.text, 1));
+                                    projectsList.addBoardToWorkspace(workspaceName);
 
                             Navigator.of(context).pop();
                           }

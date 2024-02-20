@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/board_model.dart';
-import 'package:kandoard/repositories/board_repository.dart';
+import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addBoardDialog(BuildContext context) {
+Future<void> addBoardDialog(BuildContext context, String workspaceId) {
   final nameBoard = TextEditingController();
   final boardDescription = TextEditingController();
   return showDialog(
@@ -90,11 +89,15 @@ Future<void> addBoardDialog(BuildContext context) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para o quadro');
                           } else {
-                            final boardList = context.read<BoardRepository>();
+                            final boardList = context.read<BoardProvider>();
                             errorLabel.setErrorMenssage('');
 
-                            boardList
-                                .addBoard(BoardModel(nameBoard.text, 1, 1));
+                            final addBoard = context.read<BoardProvider>();
+                            addBoard.setNewBoard(
+                                boardName: 'Teste',
+                                boardDescription: 'Este é um teste',
+                                workspaceId: workspaceId);
+                            print('Adicionar novo board');
 
                             Navigator.of(context).pop();
                           }

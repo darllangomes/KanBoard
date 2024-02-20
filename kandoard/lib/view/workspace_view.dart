@@ -86,6 +86,8 @@ class WorkspaceViewState extends State<WorkspaceView> {
                     }),
                 IconButton(
                     onPressed: () {
+                      final addBoard = context.read<BoardProvider>();
+                      addBoard.setNewBoard(boardName: 'Teste', boardDescription: 'Este é um teste', workspaceId: workspace.getWorkspaceId);
                       print('Adicionar novo board');
                     },
                     icon: Icon(

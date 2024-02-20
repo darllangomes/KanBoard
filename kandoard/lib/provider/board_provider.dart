@@ -12,4 +12,10 @@ class BoardProvider extends ChangeNotifier{
     _boards = response;
     notifyListeners();
   }
+
+  Future<void> setNewBoard({required String boardName, required String boardDescription, required String workspaceId}) async {
+    final newBoard = await _boardService.postNewBoard(boardName: boardName, workspaceId: workspaceId, description: boardDescription);
+    _boards.add(newBoard);
+    notifyListeners();
+  }
 }

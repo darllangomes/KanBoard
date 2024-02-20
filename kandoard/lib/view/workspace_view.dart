@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
+import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../components/board_card.dart';

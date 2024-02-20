@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        
+                        Navigator.popAndPushNamed(context, '/workspace');
                       },
                       child: Stack(
                         children: [
@@ -118,7 +118,6 @@ class _LoginViewState extends State<LoginView> {
                             if (loginStatus.isNotEmpty) {
                               if (context.mounted) {
                                 if (loginStatus == 'Login') {
-                                 
                                   Navigator.popAndPushNamed(
                                       context, '/home');
                                 } else {

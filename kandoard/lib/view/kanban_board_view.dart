@@ -33,101 +33,145 @@ class _KanbanBoardState extends State<KanbanBoardView> {
         ),
         backgroundColor: AppColors.blue,
       ),
-      body: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 5,
-          itemBuilder: ((context, index) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 40, left: 30, right: 30, bottom: 30),
-                child: Card(
-                    color: AppColors.grey,
-                    elevation: 0,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: AppColors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: SizedBox(
-                        width: 375,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Nome da Coluna',
-                                    style: TextStyle(
-                                        color: AppColors.blue,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  CircleAvatar(
-                                    backgroundColor: AppColors.blue,
-                                    child: Text(
-                                      '2',
-                                      style: TextStyle(color: AppColors.grey),
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: AppColors.blue),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: AppColors.grey,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Adicionar Colunas',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: AppColors.grey,
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  print('Adicionar Coluna');
+                }),
+          ),
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                shrinkWrap: true,
+                itemBuilder: ((context, index) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 40, left: 30, right: 20, bottom: 30),
+                      child: Card(
+                          color: AppColors.grey,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: AppColors.blue,
+                              ),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: SizedBox(
+                              width: 375,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 30,
+                                              height: 30,
+                                              
+                                              decoration: BoxDecoration(color: AppColors.blue, borderRadius: BorderRadius.circular(5)),
+                                              child: Center(
+                                                child: Text(
+                                                  '2',
+                                                  style: TextStyle(
+                                                      color: AppColors.grey),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              'Nome da Coluna',
+                                              style: TextStyle(
+                                                  color: AppColors.blue,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w300),
+                                            ),
+                                          ],
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              print('adicionar cartao');
+                                            },
+                                            icon: Icon(
+                                              Icons.add_box_outlined,
+                                              size: 40,
+                                              color: AppColors.blue,
+                                            ))
+                                      ],
                                     ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Card(
-                                child:
-                                    SizedBox(width: 300, child: Text('Tarefa')),
-                              )
-                            ],
-                          ),
-                        ))),
-              ),
-            );
-          })),
-      // body: Center(
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
-      //     child: Card(
-      //         color: AppColors.grey,
-      //         elevation: 0,
-      //         shape: RoundedRectangleBorder(
-      //             side: BorderSide(
-      //               color: AppColors.blue,
-      //             ),
-      //             borderRadius: BorderRadius.circular(20)),
-      //         child: SizedBox(
-      //             width: 375,
-      //             child: Padding(
-      //               padding: const EdgeInsets.all(20.0),
-      //               child: Column(
-      //                 children: [
-      //                   Row(
-      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                     children: [
-      //                       Text(
-      //                         'Nome da Coluna',
-      //                         style: TextStyle(color: AppColors.blue, fontSize: 20, fontWeight: FontWeight.w300),
-      //                       ),
-      //                       CircleAvatar(
-      //                         backgroundColor: AppColors.blue,
-      //                         child: Text('2', style: TextStyle(color: AppColors.grey),),
-      //                       )
-      //                     ],
-      //                   ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Expanded(
+                                      child: ListView.builder(shrinkWrap: true, itemCount: 10, itemBuilder: (context, index){
+                                        
+                                        return  Card(
+                                        child: SizedBox(
+                                            width: 375,
+                                            height: 80,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Text('Nome da Tarefa',
+                                                      style: TextStyle(
+                                                          color: AppColors.grey,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w300)),
+                                                  Icon(Icons.short_text)
+                                                ],
+                                              ),
+                                            )),
+                                      );
+                                      }),
+                                    )
+                                  ],
+                                ),
+                              ))),
+                    ),
+                  );
 
-      //                   const SizedBox(height: 20,),
-
-      //                   Card(child: SizedBox(width: 300, child: Text('Tarefa')),)
-      //                 ],
-
-      //               ),
-      //             ))),
-      //   ),
-      // )
+                })),
+          ),
+        ],
+      ),
+     
     );
   }
 }

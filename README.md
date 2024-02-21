@@ -9,8 +9,8 @@ This is a repository from discipline of Agile - UFRPE - Brazil
 ## 🔧 Tecnologias
 
 **Front-end**
-- Dart
-- Flutter
+- Dart - 3.2.3
+- Flutter - 3.16.4
 
 **Back-end** - [Acesse o repositório do back-end](https://github.com/igor-felipe/kanban)
 - TypeScript

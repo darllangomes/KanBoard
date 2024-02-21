@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
@@ -87,9 +88,10 @@ class WorkspaceViewState extends State<WorkspaceView> {
                     }),
                 IconButton(
                     onPressed: () {
-                      final addBoard = context.read<BoardProvider>();
-                      addBoard.setNewBoard(boardName: 'Teste', boardDescription: 'Este é um teste', workspaceId: workspace.getWorkspaceId);
-                      print('Adicionar novo board');
+                      addBoardDialog(context, workspace.getWorkspaceId);
+                      // final addBoard = context.read<BoardProvider>();
+                      // addBoard.setNewBoard(boardName: 'Teste', boardDescription: 'Este é um teste', workspaceId: workspace.getWorkspaceId);
+                      // print('Adicionar novo board');
                     },
                     icon: Icon(
                       Icons.add_box_outlined,

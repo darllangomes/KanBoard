@@ -83,21 +83,24 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
                               fontWeight: FontWeight.w300),
                         ),
                         onPressed: () {
+                          final addBoard = context.read<BoardProvider>();
+                          // TODO: tirar essa lógica daqui de dentro 
+                          //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
                           final errorLabel =
                               context.read<TextFieldController>();
                           if (nameBoard.text.isEmpty) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para o quadro');
+                          } else if (nameBoard.text.length < 3) {
+                            errorLabel.setErrorMenssage(
+                                'Digite ao menos 3 caracteres');
                           } else {
-                            final boardList = context.read<BoardProvider>();
                             errorLabel.setErrorMenssage('');
 
-                            final addBoard = context.read<BoardProvider>();
                             addBoard.setNewBoard(
-                                boardName: 'Teste',
-                                boardDescription: 'Este é um teste',
+                                boardName: nameBoard.text,
+                                boardDescription: boardDescription.text,
                                 workspaceId: workspaceId);
-                            print('Adicionar novo board');
 
                             Navigator.of(context).pop();
                           }

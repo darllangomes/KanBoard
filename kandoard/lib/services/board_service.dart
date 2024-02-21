@@ -38,10 +38,12 @@ class BoardService {
     try {
       final response = await dio
           .post('https://kanbanboard-nj8m.onrender.com/api/board', data: {
-        "name": boardName,
+          "name": boardName,
         "workspaceId": workspaceId,
-        "description": description
+        "description": description,
+        "labels": []
       });
+      print(response);
       final newBoard = BoardModel.fromJson(response.data);
       print(response.data);
       return newBoard;

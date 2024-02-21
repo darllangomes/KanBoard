@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/repositories/ProjectRepository.dart';
-import 'package:kandoard/repositories/board_repository.dart';
+import 'package:kandoard/provider/board_provider.dart';
+import 'package:kandoard/provider/workspace_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
-import 'package:kandoard/view/board_view.dart';
-import 'package:kandoard/view/project_view.dart';
-import 'package:kandoard/view/login_view.dart';
+import 'package:kandoard/view/kanban_board_view.dart';
 import 'package:kandoard/view/workspace_view.dart';
+import 'package:kandoard/view/login_view.dart';
+import 'package:kandoard/view/home_view.dart';
 import 'package:kandoard/view/register_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) => ProjectRepository(),
-      ),
       ChangeNotifierProvider(create: (context) => TextFieldController()),
-      ChangeNotifierProvider(
-        create: (context) => BoardRepository(),
-      )
+      ChangeNotifierProvider(create: (context) => WorkspaceProvider()),
+      ChangeNotifierProvider(create: (context) => BoardProvider())
     ],
     child: const MyApp(),
   ));
@@ -42,9 +38,9 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginView.routeName: (context) => const LoginView(),
         RegisterView.routeName: (context) => const RegisterView(),
-        ProjectsView.routeName: (context) => const ProjectsView(),
+        HomeView.routeName: (context) => const HomeView(),
         KanbanBoardView.routeName: (context) => const KanbanBoardView(),
-        Board.routeName:(context) => const Board(),
+        WorkspaceView.routeName:(context) => const WorkspaceView(),
       },
     );
   }

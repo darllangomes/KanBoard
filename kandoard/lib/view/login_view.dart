@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/http/login_http.dart';
+import 'package:kandoard/services/login_service.dart';
 import 'package:kandoard/model/user_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
@@ -119,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                               if (context.mounted) {
                                 if (loginStatus == 'Login') {
                                   Navigator.popAndPushNamed(
-                                      context, '/workspace');
+                                      context, '/home');
                                 } else {
                                   LoginStatus(context, loginStatus);
                                   Timer timer =

@@ -18,7 +18,6 @@ Future<String> registerUser(
         if (response.statusCode == 200 || response.statusCode == 201) {
         User user = User.fromJson(
         jsonDecode(response.toString()) as Map<String, dynamic>);
-        UserLogged.add(user);
         return Future.value('Cadastro Realizado com sucesso');}
 
   } on DioException catch (e) {

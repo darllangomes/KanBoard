@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
-import '../http/register_http.dart';
-import '../model/user_model.dart';
+import '../services/register_service.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -127,7 +125,7 @@ class RegisterViewState extends State<RegisterView> {
                               if (context.mounted) {
                                 RegisterStatus(context, statusRegister);
                                 Timer timer =
-                                    Timer(Duration(milliseconds: 3500), () {
+                                    Timer(const Duration(milliseconds: 3500), () {
                                   Navigator.of(context, rootNavigator: true)
                                       .pop();
                                   Navigator.popAndPushNamed(context, '/login');

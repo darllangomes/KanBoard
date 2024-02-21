@@ -3,11 +3,10 @@ import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 // ignore: must_be_immutable
-class BoardCart extends StatelessWidget {
+class BoardCard extends StatelessWidget {
   String boardName;
-  final BoardModel cardContent;
+  BoardCard({super.key, required this.boardName});
 
-  BoardCart({super.key, required this.boardName, required this.cardContent});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class BoardCart extends StatelessWidget {
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/board', arguments: cardContent);
+          Navigator.pushNamed(context, '/kanban', arguments: boardName);
         },
         child: SizedBox(
             width: 375,

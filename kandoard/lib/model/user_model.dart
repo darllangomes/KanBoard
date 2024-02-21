@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class User {
   String userId;
   String userName;
@@ -20,9 +18,9 @@ class User {
     return switch (json){
       {'id': String userId,
         'email': String userEmail,
-        'name': String userName
-      } => User(userId: userId, userEmail: userEmail, userName: userName),
-      _ => throw const FormatException('Failed to load album.'),
+        'name': String userName,
+      } => User(userId: userId, userEmail: userEmail, userName: userName,),
+      _ => throw const FormatException('Failed to format user json.'),
       
     };
 

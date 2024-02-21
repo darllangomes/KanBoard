@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/ProjectModel.dart';
-import 'package:kandoard/repositories/ProjectRepository.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addProjectDialog(BuildContext context) {
-  final projectBoard = TextEditingController();
-  final projectDescription = TextEditingController();
+import '../provider/workspace_provider.dart';
+
+Future<void> addWorkspaceDialog(BuildContext context) {
+  final workspaceInput = TextEditingController();
+
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -27,7 +27,7 @@ Future<void> addProjectDialog(BuildContext context) {
                   children: [
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: projectBoard,
+                      controller: workspaceInput,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput.isEmpty
                             ? null
@@ -45,20 +45,7 @@ Future<void> addProjectDialog(BuildContext context) {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      style: TextStyle(color: AppColors.white),
-                      controller: projectDescription,
-                      decoration: InputDecoration(
-                        labelText: 'Descrição',
-                        labelStyle: TextStyle(
-                          color: AppColors.blue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                    ),
+                    
                   ],
                 );
               }),
@@ -86,16 +73,21 @@ Future<void> addProjectDialog(BuildContext context) {
                         onPressed: () {
                           final errorLabel =
                               context.read<TextFieldController>();
-                          if (projectBoard.text.isEmpty) {
+                          // TODO: tirar essa lógica daqui de dentro
+                          //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
+                          if (workspaceInput.text.isEmpty) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para o Projeto');
+                          } else if (workspaceInput.text.length < 3) {
+                            errorLabel.setErrorMenssage(
+                                'Digite ao menos 3 caracteres');
                           } else {
-                            final projectList =
-                                context.read<ProjectRepository>();
+                            final projectsList =
+                                context.read<WorkspaceProvider>();
                             errorLabel.setErrorMenssage('');
 
-                            projectList
-                                .addProject(ProjectModel(projectBoard.text, 1));
+                            projectsList
+                                .addBoardToWorkspace(workspaceInput.text);
 
                             Navigator.of(context).pop();
                           }

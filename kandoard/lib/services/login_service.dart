@@ -12,10 +12,8 @@ Future<String> loginUser({required userEmail, required userPassword}) async {
     Map<String, dynamic> decodedToken = JwtDecoder.decode(response.toString());
   
     //TODO: implementar logica que faça a requisção GetOne da API, para pegar a informação userName do usuario
-    if(UserLogged.isEmpty){
-      User user = User(userEmail: userEmail, userId: decodedToken['id'], userName: '');
-      UserLogged.add(user);
-    }
+    User user = User(userEmail: userEmail, userId: response.toString(), userName: '');
+    UserLogged.add(user);
     if(response.statusCode == 200 || response.statusCode == 201) {
       return 'Login';
     }

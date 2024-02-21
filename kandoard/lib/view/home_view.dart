@@ -83,7 +83,15 @@ class HomeViewState extends State<HomeView>   {
                     })),
             const SizedBox(
               height: 56,
-            ), 
+            ), Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Suas áreas de trabalho:', style: TextStyle(
+                              color: AppColors.blue,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w300),),
+              ],
+            ), const SizedBox(height: 10,),
 
             Consumer<WorkspaceProvider>(builder: (context, value, child) {
               final workspace = value.getWorkspace;
@@ -92,7 +100,7 @@ class HomeViewState extends State<HomeView>   {
                   itemCount: workspace.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 50),
+                      padding: const EdgeInsets.only(bottom: 30),
                       child: WorkspaceCard(
                         workspace: workspace[index],
                        

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
-import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../components/board_card.dart';
@@ -20,18 +19,20 @@ class WorkspaceView extends StatefulWidget {
 class WorkspaceViewState extends State<WorkspaceView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final workspace = ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
-      Provider.of<BoardProvider>(context, listen: false).getUserBoards(workspace.getWorkspaceId);
+      final workspace =
+          ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
+      Provider.of<BoardProvider>(context, listen: false)
+          .getUserBoards(workspace.getWorkspaceId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final workspace = ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
+    final workspace =
+        ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
 
     return Scaffold(
       backgroundColor: AppColors.grey,
@@ -42,11 +43,11 @@ class WorkspaceViewState extends State<WorkspaceView> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back)),
-        actionsIconTheme: IconThemeData(),
+        actionsIconTheme: const IconThemeData(),
         title: Text(
           workspace.getWorkspaceName,
-          style: const TextStyle(
-              color: Color(0xFFD9D9D9),
+          style: TextStyle(
+              color: AppColors.white,
               fontSize: 24,
               fontWeight: FontWeight.w200,
               fontStyle: FontStyle.italic),
@@ -89,9 +90,6 @@ class WorkspaceViewState extends State<WorkspaceView> {
                 IconButton(
                     onPressed: () {
                       addBoardDialog(context, workspace.getWorkspaceId);
-                      // final addBoard = context.read<BoardProvider>();
-                      // addBoard.setNewBoard(boardName: 'Teste', boardDescription: 'Este é um teste', workspaceId: workspace.getWorkspaceId);
-                      // print('Adicionar novo board');
                     },
                     icon: Icon(
                       Icons.add_box_outlined,
@@ -103,20 +101,28 @@ class WorkspaceViewState extends State<WorkspaceView> {
             const SizedBox(
               height: 42,
             ),
-            
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Seus quadros Kanban:', style: TextStyle(
+                              color: AppColors.blue,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w300),),
+              ],
+            ), const SizedBox(height: 10,),
             Consumer<BoardProvider>(builder: (context, value, child) {
               final boards = value.getBoards;
               return Expanded(
                 child: ListView.builder(
-                    itemCount: boards.length, itemBuilder: (context, index) {
+                    itemCount: boards.length,
+                    itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 40),
+                        padding: const EdgeInsets.only(bottom: 30),
                         child: BoardCard(boardName: boards[index].getBoardName),
                       );
                     }),
               );
             })
-           
           ],
         )),
       ),

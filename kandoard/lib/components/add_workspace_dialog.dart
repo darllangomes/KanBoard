@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../provider/workspace_provider.dart';
 
-Future<void> addProjectDialog(BuildContext context, String workspaceName) {
-  final projectBoard = TextEditingController();
-  final projectDescription = TextEditingController();
+Future<void> addWorkspaceDialog(BuildContext context) {
+  final workspaceInput = TextEditingController();
+
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -27,7 +27,7 @@ Future<void> addProjectDialog(BuildContext context, String workspaceName) {
                   children: [
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: projectBoard,
+                      controller: workspaceInput,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput.isEmpty
                             ? null
@@ -45,20 +45,7 @@ Future<void> addProjectDialog(BuildContext context, String workspaceName) {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      style: TextStyle(color: AppColors.white),
-                      controller: projectDescription,
-                      decoration: InputDecoration(
-                        labelText: 'Descrição',
-                        labelStyle: TextStyle(
-                          color: AppColors.blue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                    ),
+                    
                   ],
                 );
               }),
@@ -86,15 +73,21 @@ Future<void> addProjectDialog(BuildContext context, String workspaceName) {
                         onPressed: () {
                           final errorLabel =
                               context.read<TextFieldController>();
-                          if (projectBoard.text.isEmpty) {
+                          // TODO: tirar essa lógica daqui de dentro
+                          //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
+                          if (workspaceInput.text.isEmpty) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para o Projeto');
+                          } else if (workspaceInput.text.length < 3) {
+                            errorLabel.setErrorMenssage(
+                                'Digite ao menos 3 caracteres');
                           } else {
                             final projectsList =
-                                        context.read<WorkspaceProvider>();
-                                    errorLabel.setErrorMenssage('');
+                                context.read<WorkspaceProvider>();
+                            errorLabel.setErrorMenssage('');
 
-                                    projectsList.addBoardToWorkspace(workspaceName);
+                            projectsList
+                                .addBoardToWorkspace(workspaceInput.text);
 
                             Navigator.of(context).pop();
                           }

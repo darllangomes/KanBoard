@@ -97,8 +97,10 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                             Container(
                                               width: 30,
                                               height: 30,
-                                              
-                                              decoration: BoxDecoration(color: AppColors.blue, borderRadius: BorderRadius.circular(5)),
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.blue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
                                               child: Center(
                                                 child: Text(
                                                   '2',
@@ -134,44 +136,58 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                       height: 20,
                                     ),
                                     Expanded(
-                                      child: ListView.builder(shrinkWrap: true, itemCount: 10, itemBuilder: (context, index){
-                                        
-                                        return  Card(
-                                        child: SizedBox(
-                                            width: 375,
-                                            height: 80,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  Text('Nome da Tarefa',
-                                                      style: TextStyle(
-                                                          color: AppColors.grey,
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w300)),
-                                                  Icon(Icons.short_text)
-                                                ],
-                                              ),
-                                            )),
-                                      );
-                                      }),
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: 10,
+                                          itemBuilder: (context, index) {
+                                            return Card(
+                                              clipBehavior: Clip.hardEdge,
+                                                child: InkWell(
+                                              onTap: () {
+                                                print('Clicado');
+                                              },
+                                              onLongPress: () {
+                                                print('pressionado longamente');
+                                              },
+                                              child: SizedBox(
+                                                  width: 375,
+                                                  height: 80,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Text('Nome da Tarefa',
+                                                            style: TextStyle(
+                                                                color: AppColors
+                                                                    .grey,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300)),
+                                                        Icon(Icons.short_text)
+                                                      ],
+                                                    ),
+                                                  )),
+                                            ));
+                                          }),
                                     )
                                   ],
                                 ),
                               ))),
                     ),
                   );
-
                 })),
           ),
         ],
       ),
-     
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/services/login_service.dart';
-import 'package:kandoard/model/user_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
 
 class LoginView extends StatefulWidget {
@@ -68,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/workspace');
+    
                       },
                       child: Stack(
                         children: [

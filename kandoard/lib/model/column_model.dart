@@ -5,7 +5,7 @@ class ColumnModel {
   String columnDescription;
   String columnCreatedAt;
   String columnUpdatedAt;
-  String columnWip;
+  int columnWip;
 
   String get getColumnId => columnId;
   String get getColumnName => columnName;
@@ -13,7 +13,7 @@ class ColumnModel {
   String get getColumnDescription => columnDescription;
   String get getColumnCreatedAt => columnCreatedAt;
   String get getColumnUpdatedAt => columnUpdatedAt;
-  String get getColumnWip => columnWip;
+  int get getColumnWip => columnWip;
 
   ColumnModel(
       {required this.columnId,
@@ -24,16 +24,26 @@ class ColumnModel {
       required this.columnUpdatedAt,
       required this.columnWip});
 
-  factory ColumnModel.fromJson(Map<String, dynamic>json){
+  factory ColumnModel.fromJson(Map<String, dynamic> json) {
     return switch (json) {
-      {"id": String columnId,
-    "name": String columnName,
-    "boardId": String boardId,
-    "description": String columnDescription,
-    "createdAt": String columnCreatedAt,
-    "updatedAt": String columnUpdatedAt,
-    "wip": String columnWip} => ColumnModel(columnId: columnId, columnName: columnName, boardId: boardId, columnDescription: columnDescription, columnCreatedAt: columnCreatedAt, columnUpdatedAt: columnUpdatedAt, columnWip: columnWip),
-    _ => throw 'Não foi possivel adicionar coluna'
-    } ;
+      {
+        "id": String columnId,
+        "name": String columnName,
+        "description": String columnDescription,
+        "boardId": String boardId,
+        "wip": int columnWip,
+        "createdAt": String columnCreatedAt,
+        "updatedAt": String columnUpdatedAt,
+      } =>
+        ColumnModel(
+            columnId: columnId,
+            columnName: columnName,
+            columnDescription: columnDescription,
+            boardId: boardId,
+            columnWip: columnWip,
+            columnCreatedAt: columnCreatedAt,
+            columnUpdatedAt: columnUpdatedAt),
+      _ => throw 'Não foi possivel adicionar coluna'
+    };
   }
 }

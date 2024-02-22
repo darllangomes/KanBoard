@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/provider/board_provider.dart';
-import 'package:kandoard/provider/card_provider.dart';
 import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/provider/workspace_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -19,7 +18,6 @@ void main() {
       ChangeNotifierProvider(create: (context) => WorkspaceProvider()),
       ChangeNotifierProvider(create: (context) => BoardProvider()),
       ChangeNotifierProvider(create: (context) => ColumnProvider()), 
-      ChangeNotifierProvider(create: (context) => CardProvider()),
     ],
     child: const MyApp(),
   ));

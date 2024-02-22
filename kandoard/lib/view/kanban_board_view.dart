@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/model/board_model.dart';
-import 'package:kandoard/provider/card_provider.dart';
 import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';

@@ -95,7 +95,10 @@ class HomeViewState extends State<HomeView>   {
 
             Consumer<WorkspaceProvider>(builder: (context, value, child) {
               final workspace = value.getWorkspace;
-              return Expanded(
+              if(value.isLoading){
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return Expanded(
                 child: ListView.builder(
                   itemCount: workspace.length,
                   itemBuilder: (context, index) {
@@ -109,6 +112,8 @@ class HomeViewState extends State<HomeView>   {
                   },
                 ),
               );
+              }
+              
             })
 
           ],

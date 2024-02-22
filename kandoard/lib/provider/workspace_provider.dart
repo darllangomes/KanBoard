@@ -21,8 +21,12 @@ class WorkspaceProvider extends ChangeNotifier {
   }
 
   void addBoardToWorkspace(String workspaceName) async {
+    isLoading = true;
+    notifyListeners();
+
     final newWorkspace = await _service.postWorkspace(workspaceName);
     _workspace.add(newWorkspace);
+    isLoading = false;
     notifyListeners();
   }
 

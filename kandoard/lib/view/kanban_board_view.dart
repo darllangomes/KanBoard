@@ -24,8 +24,6 @@ class _KanbanBoardState extends State<KanbanBoardView> {
 
       Provider.of<ColumnProvider>(context, listen: false)
           .getColumns(boardContent.boardId);
-
-      Provider.of<CardProvider>(context, listen: false).getCardsList();
     });
   }
 
@@ -165,13 +163,9 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
+                                                    final test = context.read<ColumnProvider>();
+                                                    test.addNewCardToColumn();
                                                     print('adicionar cartao');
-                                                    // final test = CardService();
-                                                    // final t = await test
-                                                    //     .getAllCards();
-                                                    // print(t[0].cardActivity[0]);
-                                                    // print(t[0].cardActivity[0]
-                                                    //     ['date']);
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -183,24 +177,12 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                           const SizedBox(
                                             height: 20,
                                           ),
-                                          Consumer<CardProvider>(
-                                              builder: (context, value, child) {
-                                            final cards = value.getCards;
-                                            if (value.isCardListLoading) {
-                                              return const Column(
-                                                children: [
-                                                  Center(
-                                                      child:
-                                                          CircularProgressIndicator())
-                                                ],
-                                              );
-                                            } else {
-                                              return Expanded(
+                                              Expanded(
                                                 child: ListView.builder(
                                                     shrinkWrap: true,
-                                                    itemCount: cards.length,
+                                                    itemCount: columns[index].cards.length,
                                                     itemBuilder:
-                                                        (context, index) {
+                                                        (context, indexCard) {
                                                       return Card(
                                                           clipBehavior:
                                                               Clip.hardEdge,
@@ -229,8 +211,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                             .spaceEvenly,
                                                                     children: [
                                                                       Text(
-                                                                          cards[index]
-                                                                              .getcardTitle,
+                                                                          columns[index].cards[indexCard].cardTitle,
                                                                           style: TextStyle(
                                                                               color: AppColors.grey,
                                                                               fontSize: 20,
@@ -243,9 +224,9 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                 )),
                                                           ));
                                                     }),
-                                              );
-                                            }
-                                          })
+                                              )
+                                            
+                                          
 
                                           //Lista de cards Termina aqui
                                         ],

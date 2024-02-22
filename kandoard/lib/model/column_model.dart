@@ -1,3 +1,5 @@
+import 'package:kandoard/model/card_model.dart';
+
 class ColumnModel {
   String columnId;
   String columnName;
@@ -6,6 +8,7 @@ class ColumnModel {
   String columnCreatedAt;
   String columnUpdatedAt;
   int columnWip;
+  List<CardModel> cards = [];
 
   String get getColumnId => columnId;
   String get getColumnName => columnName;

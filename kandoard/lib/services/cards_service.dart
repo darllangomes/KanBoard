@@ -6,7 +6,7 @@ import '../model/user_model.dart';
 class CardService {
   Dio dio = Dio();
 
-  Future<List<CardModel>> getCardsList() async {
+  Future<List<CardModel>> getAllCards() async {
     dio.options.headers['Authorization'] =
         "Bearer ${UserLogged.first.getUserId}";
     try {

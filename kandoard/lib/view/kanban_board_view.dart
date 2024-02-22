@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/model/board_model.dart';
+import 'package:kandoard/provider/column_provider.dart';
+import 'package:kandoard/services/column_service.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class KanbanBoardView extends StatefulWidget {
   const KanbanBoardView({super.key});
@@ -11,8 +15,21 @@ class KanbanBoardView extends StatefulWidget {
 
 class _KanbanBoardState extends State<KanbanBoardView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final boardContent =
+          ModalRoute.of(context)!.settings.arguments as BoardModel;
+      Provider.of<ColumnProvider>(context, listen: false)
+          .getColumns(boardContent.boardId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final boardCard = ModalRoute.of(context)!.settings.arguments as String;
+    final boardContent =
+        ModalRoute.of(context)!.settings.arguments as BoardModel;
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
@@ -24,7 +41,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
             icon: const Icon(Icons.arrow_back)),
         actionsIconTheme: const IconThemeData(),
         title: Text(
-          boardCard,
+          boardContent.boardName,
           style: TextStyle(
               color: AppColors.white,
               fontSize: 24,
@@ -61,133 +78,290 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                   ],
                 ),
                 onPressed: () {
+                  final date = DateTime.now();
+                  final setColumn = context.read<ColumnProvider>();
+                  setColumn.setNewColumn(
+                      columnName: 'Novo Novo',
+                      boardId: boardContent.boardId,
+                      columnDescription: '',
+                      columnCreatedAt: date.toString(),
+                      columnUpdatedAt: date.toString(),
+                      columnWip: 5);
+
                   print('Adicionar Coluna');
                 }),
           ),
-          Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                shrinkWrap: true,
-                itemBuilder: ((context, index) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 40, left: 30, right: 20, bottom: 30),
-                      child: Card(
-                          color: AppColors.grey,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: AppColors.blue,
-                              ),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: SizedBox(
-                              width: 375,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.blue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Center(
-                                                child: Text(
-                                                  '2',
-                                                  style: TextStyle(
-                                                      color: AppColors.grey),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              'Nome da Coluna',
-                                              style: TextStyle(
-                                                  color: AppColors.blue,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w300),
-                                            ),
-                                          ],
-                                        ),
-                                        IconButton(
-                                            onPressed: () {
-                                              print('adicionar cartao');
-                                            },
-                                            icon: Icon(
-                                              Icons.add_box_outlined,
-                                              size: 40,
-                                              color: AppColors.blue,
-                                            ))
-                                      ],
+          Consumer<ColumnProvider>(
+            builder: (context, value, child) {
+              final columns = value.getColumnsList;
+              if (value.isLoading) {
+                return const CircularProgressIndicator();
+              } else {
+                return Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: columns.length,
+                      shrinkWrap: true,
+                      itemBuilder: ((context, index) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 40, left: 30, right: 20, bottom: 30),
+                            child: Card(
+                                color: AppColors.grey,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: AppColors.blue,
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Expanded(
-                                      child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: 10,
-                                          itemBuilder: (context, index) {
-                                            return Card(
-                                              clipBehavior: Clip.hardEdge,
-                                                child: InkWell(
-                                              onTap: () {
-                                                print('Clicado');
-                                              },
-                                              onLongPress: () {
-                                                print('pressionado longamente');
-                                              },
-                                              child: SizedBox(
-                                                  width: 375,
-                                                  height: 80,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Text('Nome da Tarefa',
-                                                            style: TextStyle(
-                                                                color: AppColors
-                                                                    .grey,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300)),
-                                                        Icon(Icons.short_text)
-                                                      ],
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: SizedBox(
+                                    width: 375,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: 30,
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
+                                                    child: Center(
+                                                      child: Text(
+                                                        columns[index]
+                                                            .columnWip
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color:
+                                                                AppColors.grey),
+                                                      ),
                                                     ),
-                                                  )),
-                                            ));
-                                          }),
-                                    )
-                                  ],
-                                ),
-                              ))),
-                    ),
-                  );
-                })),
-          ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    columns[index].columnName,
+                                                    style: TextStyle(
+                                                        color: AppColors.blue,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w300),
+                                                  ),
+                                                ],
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    print('adicionar cartao');
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.add_box_outlined,
+                                                    size: 40,
+                                                    color: AppColors.blue,
+                                                  ))
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Expanded(
+                                            child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    columns[index].columnWip,
+                                                itemBuilder: (context, index) {
+                                                  return Card(
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          print('Clicado');
+                                                        },
+                                                        onLongPress: () {
+                                                          print(
+                                                              'pressionado longamente');
+                                                        },
+                                                        child: SizedBox(
+                                                            width: 375,
+                                                            height: 80,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(
+                                                                      10.0),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                children: [
+                                                                  Text(
+                                                                      'Nome da Tarefa',
+                                                                      style: TextStyle(
+                                                                          color: AppColors
+                                                                              .grey,
+                                                                          fontSize:
+                                                                              20,
+                                                                          fontWeight:
+                                                                              FontWeight.w300)),
+                                                                  const Icon(Icons
+                                                                      .short_text)
+                                                                ],
+                                                              ),
+                                                            )),
+                                                      ));
+                                                }),
+                                          )
+                                        ],
+                                      ),
+                                    ))),
+                          ),
+                        );
+                      })),
+                );
+              }
+            },
+          )
+
+          //Termina Aqui
         ],
       ),
     );
   }
 }
+
+// Expanded(
+//             child: ListView.builder(
+//                 scrollDirection: Axis.horizontal,
+//                 itemCount: 5,
+//                 shrinkWrap: true,
+//                 itemBuilder: ((context, index) {
+//                   return Center(
+//                     child: Padding(
+//                       padding: const EdgeInsets.only(
+//                           top: 40, left: 30, right: 20, bottom: 30),
+//                       child: Card(
+//                           color: AppColors.grey,
+//                           elevation: 0,
+//                           shape: RoundedRectangleBorder(
+//                               side: BorderSide(
+//                                 color: AppColors.blue,
+//                               ),
+//                               borderRadius: BorderRadius.circular(20)),
+//                           child: SizedBox(
+//                               width: 375,
+//                               child: Padding(
+//                                 padding: const EdgeInsets.all(20.0),
+//                                 child: Column(
+//                                   children: [
+//                                     Row(
+//                                       mainAxisAlignment:
+//                                           MainAxisAlignment.spaceBetween,
+//                                       children: [
+//                                         Row(
+//                                           children: [
+//                                             Container(
+//                                               width: 30,
+//                                               height: 30,
+//                                               decoration: BoxDecoration(
+//                                                   color: AppColors.blue,
+//                                                   borderRadius:
+//                                                       BorderRadius.circular(5)),
+//                                               child: Center(
+//                                                 child: Text(
+//                                                   '2',
+//                                                   style: TextStyle(
+//                                                       color: AppColors.grey),
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                             const SizedBox(
+//                                               width: 10,
+//                                             ),
+//                                             Text(
+//                                               'Nome da Coluna',
+//                                               style: TextStyle(
+//                                                   color: AppColors.blue,
+//                                                   fontSize: 20,
+//                                                   fontWeight: FontWeight.w300),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                         IconButton(
+//                                             onPressed: () {
+//                                               print('adicionar cartao');
+//                                             },
+//                                             icon: Icon(
+//                                               Icons.add_box_outlined,
+//                                               size: 40,
+//                                               color: AppColors.blue,
+//                                             ))
+//                                       ],
+//                                     ),
+//                                     const SizedBox(
+//                                       height: 20,
+//                                     ),
+//                                     Expanded(
+//                                       child: ListView.builder(
+//                                           shrinkWrap: true,
+//                                           itemCount: 10,
+//                                           itemBuilder: (context, index) {
+//                                             return Card(
+//                                               clipBehavior: Clip.hardEdge,
+//                                                 child: InkWell(
+//                                               onTap: () {
+//                                                 ColumnService sv = ColumnService();
+//                                                 sv.getAllColums();
+//                                                 print('Clicado');
+//                                               },
+//                                               onLongPress: () {
+//                                                 print('pressionado longamente');
+//                                               },
+//                                               child: SizedBox(
+//                                                   width: 375,
+//                                                   height: 80,
+//                                                   child: Padding(
+//                                                     padding:
+//                                                         const EdgeInsets.all(
+//                                                             10.0),
+//                                                     child: Column(
+//                                                       crossAxisAlignment:
+//                                                           CrossAxisAlignment
+//                                                               .start,
+//                                                       mainAxisAlignment:
+//                                                           MainAxisAlignment
+//                                                               .spaceEvenly,
+//                                                       children: [
+//                                                         Text('Nome da Tarefa',
+//                                                             style: TextStyle(
+//                                                                 color: AppColors
+//                                                                     .grey,
+//                                                                 fontSize: 20,
+//                                                                 fontWeight:
+//                                                                     FontWeight
+//                                                                         .w300)),
+//                                                         Icon(Icons.short_text)
+//                                                       ],
+//                                                     ),
+//                                                   )),
+//                                             ));
+//                                           }),
+//                                     )
+//                                   ],
+//                                 ),
+//                               ))),
+//                     ),
+//                   );
+//                 })),
+//           ),

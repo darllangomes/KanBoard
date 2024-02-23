@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/add_card_dialog.dart';
 import 'package:kandoard/components/add_column_dialog.dart';
+import 'package:kandoard/controller/card_color_controller.dart';
+import 'package:kandoard/controller/column_color_controller.dart';
 import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -32,6 +34,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
   Widget build(BuildContext context) {
     final boardContent =
         ModalRoute.of(context)!.settings.arguments as BoardModel;
+    
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
@@ -104,7 +107,9 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                                      color: AppColors.blue,
+                                      color: columnColor(
+                                          columns[index].columnWip,
+                                          columns[index].cards.length),
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                                 child: SizedBox(
@@ -123,7 +128,12 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                     width: 30,
                                                     height: 30,
                                                     decoration: BoxDecoration(
-                                                        color: AppColors.blue,
+                                                        color: columnColor(
+                                                            columns[index]
+                                                                .columnWip,
+                                                            columns[index]
+                                                                .cards
+                                                                .length),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -154,9 +164,6 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               IconButton(
                                                   onPressed: () async {
                                                     addCardDialog(context);
-                                                    // final test = context
-                                                    //     .read<ColumnProvider>();
-                                                    // test.addNewCardToColumn();
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -175,7 +182,12 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                     columns[index].cards.length,
                                                 itemBuilder:
                                                     (context, indexCard) {
+                                                  final cards =
+                                                      columns[index].cards;
                                                   return Card(
+                                                      color: cardColor(
+                                                          cards[indexCard]
+                                                              .cardPriority),
                                                       clipBehavior:
                                                           Clip.hardEdge,
                                                       child: InkWell(
@@ -185,6 +197,25 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                         onLongPress: () {
                                                           print(
                                                               'pressionado longamente');
+                                                          
+                                                          if(columns[index] != columns.last){
+                                                            if(cards[indexCard].isPressed == false ){
+
+                                                              cards[indexCard].setPressed(true);
+                                                              print('if 1: ${cards[indexCard].isPressed}' );
+                                                            } else {
+                                                              
+                                                              cards[indexCard].setPressed(false);
+                                                              print('if 2 ${cards[indexCard].isPressed}');
+                                                            }
+
+                                                          setState(() {
+                                                            
+                                                          });
+
+                                                          }
+
+                                                          
                                                         },
                                                         child: SizedBox(
                                                             width: 375,
@@ -194,36 +225,51 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                   const EdgeInsets
                                                                       .all(
                                                                       10.0),
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
+                                                              child: Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
-                                                                        .spaceEvenly,
+                                                                        .spaceBetween,
                                                                 children: [
-                                                                  Text(
-                                                                      columns[index]
-                                                                          .cards[
-                                                                              indexCard]
-                                                                          .cardTitle,
-                                                                      style: TextStyle(
-                                                                          color: AppColors
-                                                                              .grey,
-                                                                          fontSize:
-                                                                              20,
-                                                                          fontWeight:
-                                                                              FontWeight.w300)),
-                                                                  const Icon(Icons
-                                                                      .short_text)
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    children: [
+                                                                      Text(
+                                                                          cards[indexCard]
+                                                                              .cardTitle,
+                                                                          style: TextStyle(
+                                                                              color: AppColors.grey,
+                                                                              fontSize: 20,
+                                                                              fontWeight: FontWeight.w300)),
+                                                                      const Icon(
+                                                                          Icons
+                                                                              .short_text),
+                                                                    ],
+                                                                  ),
+                                                                  cards[indexCard].isPressed
+                                                                      ? 
+                                                                       IconButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            print('Mudar de coluna');
+                                                                          },
+                                                                          icon:
+                                                                              Icon(Icons.arrow_forward)) : IconButton(
+                                                                          onPressed:
+                                                                              () {},
+                                                                              color: Colors.transparent,
+                                                                          icon: Icon(Icons
+                                                                              .arrow_forward))
                                                                 ],
                                                               ),
                                                             )),
                                                       ));
                                                 }),
                                           )
-
-                                      
                                         ],
                                       ),
                                     ))),
@@ -234,9 +280,29 @@ class _KanbanBoardState extends State<KanbanBoardView> {
               }
             },
           )
-
         ],
       ),
     );
   }
+
+  // Future<void> switchCardColumn() {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           backgroundColor: AppColors.grey,
+  //           title: Text(
+  //             'Mover Tarefa',
+  //             style: TextStyle(color: AppColors.blue),
+  //           ),
+  //           content: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               IconButton(onPressed: () {}, color: AppColors.blue, icon: Icon(Icons.arrow_back)),
+  //               IconButton(onPressed: () {}, color: AppColors.blue, icon: Icon(Icons.arrow_forward))
+  //             ],
+  //           ),
+  //         );
+  //       });
+  // }
 }

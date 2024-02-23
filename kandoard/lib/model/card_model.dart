@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class CardModel {
   int cardId;
   String cardTitle;
@@ -17,6 +15,11 @@ class CardModel {
   List cardMembers =
       []; // {"userId": "clsxklj7l00006btky261yytp","workspaceId": "clsw2p2qr0000bm04u4z5k82f"}
   List cardLabels = [];
+
+  bool isPressed = false;
+  void setPressed(bool pressed){
+    isPressed = pressed;
+  }
 
   int get getCardId => cardId;
   String get getcardTitle => cardTitle;
@@ -67,40 +70,4 @@ class CardModel {
         cardLabels: List.from(map['labels'] as List) ); //TODO: tentar transformar List em List<Labels>
   }
 
-  // factory CardModel.fromJson(Map<String, dynamic> json) {
-  //   return switch (json) {
-  //     {
-  //       "id": int cardId,
-  //       "title": String cardTitle,
-  //       "description": String cardDescription,
-  //       "priority": String cardPriority,
-  //       "cover": String cardCover,
-  //       "archived": bool cardArchived,
-  //       "dueDate": String cardDueDate,
-  //       "columnId": String columnId,
-  //       "comments": List cardComments,
-  //       "activity": List cardActivity,
-  //       "createdAt": String cardCreatedAt,
-  //       "updatedAt": String cardUpdatedAt,
-  //       "members": List cardMembers,
-  //       "labels": List cardLabels
-  //     } =>
-  //       CardModel(
-  //           cardId: cardId,
-  //           cardTitle: cardTitle,
-  //           cardDescription: cardDescription,
-  //           cardPriority: cardPriority,
-  //           cardCover: cardCover,
-  //           cardArchived: cardArchived,
-  //           cardDueDate: cardDueDate,
-  //           columnId: columnId,
-  //           cardComments: cardComments,
-  //           cardActivity: cardActivity,
-  //           cardCreatedAt: cardCreatedAt,
-  //           cardUpdatedAt: cardUpdatedAt,
-  //           cardMembers: cardMembers,
-  //           cardLabels: cardLabels),
-  //     _ => throw 'Não foi possivel adicionar card'
-  //   };
-  // }
 }

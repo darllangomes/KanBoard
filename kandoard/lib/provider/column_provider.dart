@@ -59,37 +59,22 @@ class ColumnProvider extends ChangeNotifier {
   }
 
   Future<void> addNewCardToColumn() async {
-    // final m = CardModel(
-    //     cardId: 1,
-    //     cardTitle: 'Aqui Sou eu',
-    //     cardDescription: 'cardDescription',
-    //     cardPriority: 'low',
-    //     cardCover: null,
-    //     cardArchived: false,
-    //     cardDueDate: null,
-    //     columnId: 'clsxh18hj0005wd4whlxevuxd',
-    //     cardComments: [],
-    //     cardActivity: [],
-    //     cardCreatedAt: 'cardCreatedAt',
-    //     cardUpdatedAt: 'cardUpdatedAt',
-    //     cardMembers: [],
-    //     cardLabels: []);
+   
     final response = await _cardService.createCard(
-        cardTitle: 'Soy yo',
-        cardDescription: 'cardDescription',
-        cardPriority: 'low',
+        cardTitle: 'Soy yo', //campo Obrigatorio
+        cardDescription: 'cardDescription', 
+        cardPriority: 'low', //campo Obrigatorio
         cardCover: null,
         cardArchived: false,
         cardDueDate: null,
-        columnId: 'clsxh18hj0005wd4whlxevuxd',
+        columnId: 'clsxh18hj0005wd4whlxevuxd', //campo Obrigatorio
         cardComments: [],
-        cardCreatedAt: 'cardCreatedAt',
+        cardCreatedAt: 'cardCreatedAt', 
         cardUpdatedAt: 'cardUpdatedAt',
-        cardMembers: [],
+        cardMembers: [], //campo Obrigatorio
         cardLabels: []);
 
-    // final teste = _columns.where((_columns) => _columns.columnId == m.columnId);
-    final teste = _columns.where((_columns) => _columns.columnId == response.columnId);
+    final teste = _columns.where((columns) => columns.columnId == response.columnId);
     if (teste.isNotEmpty) {
       print(teste);
       teste.first.cards.add(response);
@@ -97,5 +82,22 @@ class ColumnProvider extends ChangeNotifier {
     } else {
       print('Algo deu errado');
     }
+  }
+
+  Future<void> changeCardtoNextColumn({required CardModel card, required int indexCard}) async {
+    final indexColunaAtual = _columns.indexOf(_columns.where((columns) => columns.getColumnId == card.getcolumnId).first);
+    final indexColumnToMoveCard = indexColunaAtual+1;
+    final columnToMoveCardId = _columns[indexColumnToMoveCard].getColumnId;
+
+    final response = await _cardService.putSwitchColumn(cardId: card.getCardId, columnId: columnToMoveCardId, cardActivity: {"action": "move"});
+    
+    // final cardToRemove = _columns[indexColunaAtual].cards[indexCard];
+    _columns[indexColunaAtual].cards.remove(card);
+    notifyListeners();
+
+    _columns[indexColumnToMoveCard].cards.add(response);
+    notifyListeners();
+
+    
   }
 }

@@ -34,7 +34,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
   Widget build(BuildContext context) {
     final boardContent =
         ModalRoute.of(context)!.settings.arguments as BoardModel;
-    
+
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
@@ -90,7 +90,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
             builder: (context, value, child) {
               final columns = value.getColumnsList;
               if (value.isLoading) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else {
                 return Expanded(
                   child: ListView.builder(
@@ -163,7 +163,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
-                                                    addCardDialog(context);
+                                                    // addCardDialog(context);
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -192,30 +192,28 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                           Clip.hardEdge,
                                                       child: InkWell(
                                                         onTap: () {
+                                                          //TODO: abrir tela que mostra as informacoes do card, e as opçoes de editar e excluir
                                                           print('Clicado');
                                                         },
                                                         onLongPress: () {
-                                                          print(
-                                                              'pressionado longamente');
-                                                          
-                                                          if(columns[index] != columns.last){
-                                                            if(cards[indexCard].isPressed == false ){
-
-                                                              cards[indexCard].setPressed(true);
-                                                              print('if 1: ${cards[indexCard].isPressed}' );
+                                                          if (columns[index] !=
+                                                              columns.last) {
+                                                            if (cards[indexCard]
+                                                                    .isPressed ==
+                                                                false) {
+                                                              cards[indexCard]
+                                                                  .setPressed(
+                                                                      true);
+                                                             
                                                             } else {
+                                                              cards[indexCard]
+                                                                  .setPressed(
+                                                                      false);
                                                               
-                                                              cards[indexCard].setPressed(false);
-                                                              print('if 2 ${cards[indexCard].isPressed}');
                                                             }
 
-                                                          setState(() {
-                                                            
-                                                          });
-
+                                                            setState(() {});
                                                           }
-
-                                                          
                                                         },
                                                         child: SizedBox(
                                                             width: 375,
@@ -250,20 +248,28 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                               .short_text),
                                                                     ],
                                                                   ),
-                                                                  cards[indexCard].isPressed
-                                                                      ? 
-                                                                       IconButton(
+                                                                  cards[indexCard]
+                                                                          .isPressed
+                                                                      ? IconButton(
                                                                           onPressed:
                                                                               () {
-                                                                            print('Mudar de coluna');
+                                                                            final switchCardColumn = context.read<ColumnProvider>();
+                                                                            cards[indexCard].setPressed(false);
+                                                                            setState(() {
+                                                                              
+                                                                            });
+                                                                            switchCardColumn.changeCardtoNextColumn(card: cards[indexCard], indexCard: indexCard);
+                                                                            
                                                                           },
-                                                                          icon:
-                                                                              Icon(Icons.arrow_forward)) : IconButton(
+                                                                          icon: const Icon(Icons
+                                                                              .arrow_forward))
+                                                                      : IconButton(
                                                                           onPressed:
                                                                               () {},
-                                                                              color: Colors.transparent,
-                                                                          icon: Icon(Icons
-                                                                              .arrow_forward))
+                                                                          color: Colors
+                                                                              .transparent,
+                                                                          icon:
+                                                                              Icon(Icons.arrow_forward))
                                                                 ],
                                                               ),
                                                             )),
@@ -284,25 +290,4 @@ class _KanbanBoardState extends State<KanbanBoardView> {
       ),
     );
   }
-
-  // Future<void> switchCardColumn() {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           backgroundColor: AppColors.grey,
-  //           title: Text(
-  //             'Mover Tarefa',
-  //             style: TextStyle(color: AppColors.blue),
-  //           ),
-  //           content: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               IconButton(onPressed: () {}, color: AppColors.blue, icon: Icon(Icons.arrow_back)),
-  //               IconButton(onPressed: () {}, color: AppColors.blue, icon: Icon(Icons.arrow_forward))
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
 }

@@ -54,6 +54,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
               fontStyle: FontStyle.italic),
         ),
         backgroundColor: AppColors.blue,
+        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.white,))]
       ),
       body: Column(
         children: [

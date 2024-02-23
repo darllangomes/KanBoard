@@ -3,6 +3,7 @@ import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 import '../components/board_card.dart';
 
@@ -65,7 +66,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                         backgroundColor: AppColors.blue),
                     child: Row(
                       children: [
@@ -79,8 +80,9 @@ class WorkspaceViewState extends State<WorkspaceView> {
                         Text(
                           'Adicionar participantes',
                           style: TextStyle(
+                              fontSize: 16,
                               color: AppColors.grey,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),
@@ -112,16 +114,21 @@ class WorkspaceViewState extends State<WorkspaceView> {
             ), const SizedBox(height: 10,),
             Consumer<BoardProvider>(builder: (context, value, child) {
               final boards = value.getBoards;
-              return Expanded(
+              if (value.isLoading){
+                return const Center(child: CircularProgressIndicator(),);
+              } else {
+                return Expanded(
                 child: ListView.builder(
                     itemCount: boards.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 30),
-                        child: BoardCard(boardName: boards[index].getBoardName),
+                        child: BoardCard(boardContent: boards[index]),
                       );
                     }),
               );
+              }
+              
             })
           ],
         )),

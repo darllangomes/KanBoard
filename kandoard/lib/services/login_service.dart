@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:kandoard/model/user_model.dart';
 
 Future<String> loginUser({required userEmail, required userPassword}) async {
@@ -9,7 +8,7 @@ Future<String> loginUser({required userEmail, required userPassword}) async {
     final response = await dio.post('https://kanbanboard-nj8m.onrender.com/api/user/login',
         data: {'password': userPassword, 'email': userEmail});
     //TODO: implementar shared_preferences e criar logica para manter sessão do usuario ativa
-    Map<String, dynamic> decodedToken = JwtDecoder.decode(response.toString());
+    //Map<String, dynamic> decodedToken = JwtDecoder.decode(response.toString());
   
     //TODO: implementar logica que faça a requisção GetOne da API, para pegar a informação userName do usuario
     User user = User(userEmail: userEmail, userId: response.toString(), userName: '');

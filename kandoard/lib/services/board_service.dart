@@ -18,7 +18,7 @@ class BoardService {
         final board = BoardModel.fromJson(item);
         boards.add(board);
       }).toList();
-      print(boards);
+ 
 
       return boards;
     } on DioException catch (e) {
@@ -38,12 +38,14 @@ class BoardService {
     try {
       final response = await dio
           .post('https://kanbanboard-nj8m.onrender.com/api/board', data: {
-        "name": boardName,
+          "name": boardName,
         "workspaceId": workspaceId,
-        "description": description
+        "description": description,
+        "labels": []
       });
+   
       final newBoard = BoardModel.fromJson(response.data);
-      print(response.data);
+  
       return newBoard;
 
     } on DioException catch (e) {

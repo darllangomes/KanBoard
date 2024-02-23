@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 
 // ignore: must_be_immutable
 class BoardCard extends StatelessWidget {
-  String boardName;
-  BoardCard({super.key, required this.boardName});
+  BoardModel boardContent;
+  BoardCard({super.key, required this.boardContent});
 
 
   @override
@@ -18,12 +19,12 @@ class BoardCard extends StatelessWidget {
           side: BorderSide(
             color: AppColors.blue,
           ),
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         splashColor: AppColors.blue,
         onTap: () {
-          Navigator.pushNamed(context, '/kanban', arguments: boardName);
+          Navigator.pushNamed(context, '/kanban', arguments: boardContent);
         },
         child: SizedBox(
             width: 375,
@@ -44,7 +45,7 @@ class BoardCard extends StatelessWidget {
                             fontWeight: FontWeight.w200),
                       ),
                       Text(
-                        boardName,
+                        boardContent.boardName,
                         style: TextStyle(
                             color: AppColors.white,
                             fontSize: 20,

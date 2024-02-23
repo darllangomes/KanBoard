@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/workspace_provider.dart';
@@ -29,9 +30,9 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                       style: TextStyle(color: AppColors.white),
                       controller: workspaceInput,
                       decoration: InputDecoration(
-                        errorText: errorValue.errorInput.isEmpty
+                        errorText: errorValue.errorInput['name'] == ''
                             ? null
-                            : errorValue.errorInput,
+                            : errorValue.errorInput['name'],
                         labelText: 'Nome do Projeto',
                         labelStyle: TextStyle(
                           color: AppColors.blue,
@@ -39,13 +40,12 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           fontWeight: FontWeight.w300,
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    
                   ],
                 );
               }),
@@ -60,7 +60,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.blue,
                         ),
                         child: const Text(
@@ -77,14 +77,14 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
                           if (workspaceInput.text.isEmpty) {
                             errorLabel.setErrorMenssage(
-                                'Digite um nome para o Projeto');
+                                'Digite um nome para o Projeto', 'name');
                           } else if (workspaceInput.text.length < 3) {
                             errorLabel.setErrorMenssage(
-                                'Digite ao menos 3 caracteres');
+                                'Digite ao menos 3 caracteres', 'name');
                           } else {
                             final projectsList =
                                 context.read<WorkspaceProvider>();
-                            errorLabel.setErrorMenssage('');
+                            errorLabel.clearErrorMenssage();
 
                             projectsList
                                 .addBoardToWorkspace(workspaceInput.text);
@@ -102,7 +102,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               side: BorderSide(color: AppColors.blue),
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.grey,
                         ),
                         child: const Text(
@@ -116,7 +116,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           final errorLabel =
                               context.read<TextFieldController>();
                           if (errorLabel.errorInput != '') {
-                            errorLabel.setErrorMenssage('');
+                            errorLabel.clearErrorMenssage();
                           }
                           Navigator.of(context).pop();
                         }),

@@ -6,8 +6,8 @@ class TextFieldController extends ChangeNotifier {
   final TextEditingController passwordConfirmController =
       TextEditingController();
   final TextEditingController genericTextController = TextEditingController();
-  String _errorInput = '';
-  String get errorInput => _errorInput;
+  final Map<String, String> _errorInput = {'name' : '', 'description' : '', 'wip' : ''};
+  Map<String, String> get errorInput => _errorInput;
 
   String getEmailFromTextField() {
     return emailController.text.trim();
@@ -43,12 +43,18 @@ class TextFieldController extends ChangeNotifier {
 
   String? test(value, errorLabel) {
     if (value == null || value.isEmpty) {
-      return errorLabel;}
-      return null;
+      return errorLabel;
     }
+    return null;
+  }
 
-  void setErrorMenssage(String messageError) {
-    _errorInput = messageError;
+  void setErrorMenssage(String messageError, String key) {
+    _errorInput[key] = messageError;
+    notifyListeners();
+  }
+
+  void clearErrorMenssage() {
+    _errorInput.updateAll((key, value) => value = '');
     notifyListeners();
   }
 }

@@ -15,6 +15,7 @@ class ChartViewState extends State<ChartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.grey,
       appBar: AppBar(
         backgroundColor: AppColors.blue,
         iconTheme: IconThemeData(color: AppColors.white),
@@ -33,7 +34,7 @@ class ChartViewState extends State<ChartView> {
               fontStyle: FontStyle.italic),
         ),
       ),
-      body: Container(),
+      body: SingleChildScrollView(child: Column(children: [],)),
     );
   }
 }

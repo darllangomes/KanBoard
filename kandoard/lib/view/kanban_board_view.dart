@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kandoard/components/add_card_dialog.dart';
+import 'package:kandoard/components/add_column_dialog.dart';
 import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -78,18 +80,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                   ],
                 ),
                 onPressed: () {
-                  //TODO: Adicionar Modal de criaçã de coluna
-                  final date = DateTime.now();
-                  final setColumn = context.read<ColumnProvider>();
-                  setColumn.setNewColumn(
-                      columnName: 'Novo Novo',
-                      boardId: boardContent.boardId,
-                      columnDescription: '',
-                      columnCreatedAt: date.toString(),
-                      columnUpdatedAt: date.toString(),
-                      columnWip: 5);
-
-                  print('Adicionar Coluna');
+                  addColumnDialog(context, boardContent.boardId);
                 }),
           ),
           Consumer<ColumnProvider>(
@@ -162,9 +153,10 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
-                                                    final test = context.read<ColumnProvider>();
+                                                    addCardDialog(context);
+                                                    final test = context
+                                                        .read<ColumnProvider>();
                                                     test.addNewCardToColumn();
-                                                    print('adicionar cartao');
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -176,56 +168,60 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                           const SizedBox(
                                             height: 20,
                                           ),
-                                              Expanded(
-                                                child: ListView.builder(
-                                                    shrinkWrap: true,
-                                                    itemCount: columns[index].cards.length,
-                                                    itemBuilder:
-                                                        (context, indexCard) {
-                                                      return Card(
-                                                          clipBehavior:
-                                                              Clip.hardEdge,
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              print('Clicado');
-                                                            },
-                                                            onLongPress: () {
-                                                              print(
-                                                                  'pressionado longamente');
-                                                            },
-                                                            child: SizedBox(
-                                                                width: 375,
-                                                                height: 80,
-                                                                child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                          10.0),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceEvenly,
-                                                                    children: [
-                                                                      Text(
-                                                                          columns[index].cards[indexCard].cardTitle,
-                                                                          style: TextStyle(
-                                                                              color: AppColors.grey,
-                                                                              fontSize: 20,
-                                                                              fontWeight: FontWeight.w300)),
-                                                                      const Icon(
-                                                                          Icons
-                                                                              .short_text)
-                                                                    ],
-                                                                  ),
-                                                                )),
-                                                          ));
-                                                    }),
-                                              )
-                                            
-                                          
+                                          Expanded(
+                                            child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    columns[index].cards.length,
+                                                itemBuilder:
+                                                    (context, indexCard) {
+                                                  return Card(
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          print('Clicado');
+                                                        },
+                                                        onLongPress: () {
+                                                          print(
+                                                              'pressionado longamente');
+                                                        },
+                                                        child: SizedBox(
+                                                            width: 375,
+                                                            height: 80,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(
+                                                                      10.0),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                children: [
+                                                                  Text(
+                                                                      columns[index]
+                                                                          .cards[
+                                                                              indexCard]
+                                                                          .cardTitle,
+                                                                      style: TextStyle(
+                                                                          color: AppColors
+                                                                              .grey,
+                                                                          fontSize:
+                                                                              20,
+                                                                          fontWeight:
+                                                                              FontWeight.w300)),
+                                                                  const Icon(Icons
+                                                                      .short_text)
+                                                                ],
+                                                              ),
+                                                            )),
+                                                      ));
+                                                }),
+                                          )
 
                                           //Lista de cards Termina aqui
                                         ],

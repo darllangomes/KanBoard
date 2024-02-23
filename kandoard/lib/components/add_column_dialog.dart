@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/provider/board_provider.dart';
+import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addBoardDialog(BuildContext context, String workspaceId) {
-  final nameBoard = TextEditingController();
-  final boardDescription = TextEditingController();
+Future<void> addColumnDialog(BuildContext context, String boardId) {
+  final columnName = TextEditingController();
+  final columnDescription = TextEditingController();
+  final columnWip = TextEditingController();
+
   return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
           title: const Text(
-            'Criar Novo Quadro',
+            'Adicionar Coluna',
             style: TextStyle(color: Color(0xFF7398C8)),
           ),
           content: Column(
@@ -26,12 +28,12 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
                   children: [
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: nameBoard,
+                      controller: columnName,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''
                             ? null
                             : errorValue.errorInput['name'],
-                        labelText: 'Nome do quadro',
+                        labelText: 'Nome da coluna',
                         labelStyle: TextStyle(
                           color: AppColors.blue,
                           fontSize: 16,
@@ -46,12 +48,32 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
                     ),
                     TextFormField(
                       style: TextStyle(color: AppColors.white),
-                      controller: boardDescription,
+                      controller: columnDescription,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['description'] == ''
                             ? null
                             : errorValue.errorInput['description'],
                         labelText: 'Descrição',
+                        labelStyle: TextStyle(
+                          color: AppColors.blue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: AppColors.white),
+                      controller: columnWip,
+                      decoration: InputDecoration(
+                        errorText: errorValue.errorInput['wip'] == ''
+                            ? null
+                            : errorValue.errorInput['wip'],
+                        labelText: 'Work in Progress',
                         labelStyle: TextStyle(
                           color: AppColors.blue,
                           fontSize: 16,
@@ -86,31 +108,29 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
                               fontWeight: FontWeight.w300),
                         ),
                         onPressed: () {
-                          final addBoard = context.read<BoardProvider>();
-                          // TODO: tirar essa lógica daqui de dentro
-                          //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
                           final errorLabel =
                               context.read<TextFieldController>();
-                          if (nameBoard.text.isEmpty) {
+                          if (columnName.text.isEmpty) {
                             errorLabel.clearErrorMenssage();
                             errorLabel.setErrorMenssage(
-                                'Digite um nome para o quadro', 'name');
-                          } else if (nameBoard.text.length < 3) {
+                                'Digite um nome para a coluna', 'name');
+                          } else if (!RegExp(r'^-?[0-9]+$')
+                              .hasMatch(columnWip.text)) {
                             errorLabel.clearErrorMenssage();
                             errorLabel.setErrorMenssage(
-                                'Digite ao menos 3 caracteres', 'name');
-                          } else if (boardDescription.text.isEmpty){
-                            errorLabel.clearErrorMenssage();
-                            errorLabel.setErrorMenssage(
-                                'Digite uma descrição para o quadro', 'description');
-                          }
-                          else {
+                                'Digite um número inteiro', 'wip');
+                          } else {
+                            final date = DateTime.now();
+                            final projectsList = context.read<ColumnProvider>();
                             errorLabel.clearErrorMenssage();
 
-                            addBoard.setNewBoard(
-                                boardName: nameBoard.text,
-                                boardDescription: boardDescription.text,
-                                workspaceId: workspaceId);
+                            projectsList.setNewColumn(
+                                columnName: columnName.text,
+                                boardId: boardId,
+                                columnDescription: columnDescription.text,
+                                columnCreatedAt: date.toString(),
+                                columnUpdatedAt: date.toString(),
+                                columnWip: int.parse(columnWip.text));
 
                             Navigator.of(context).pop();
                           }

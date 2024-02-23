@@ -29,9 +29,9 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                       style: TextStyle(color: AppColors.white),
                       controller: workspaceInput,
                       decoration: InputDecoration(
-                        errorText: errorValue.errorInput.isEmpty
+                        errorText: errorValue.errorInput['name'] == ''
                             ? null
-                            : errorValue.errorInput,
+                            : errorValue.errorInput['name'],
                         labelText: 'Nome do Projeto',
                         labelStyle: TextStyle(
                           color: AppColors.blue,
@@ -45,7 +45,6 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                     const SizedBox(
                       height: 20,
                     ),
-                    
                   ],
                 );
               }),
@@ -77,14 +76,14 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           //TODO: adicionar logica de que não pode adicionar dois boards com mesmo nome
                           if (workspaceInput.text.isEmpty) {
                             errorLabel.setErrorMenssage(
-                                'Digite um nome para o Projeto');
+                                'Digite um nome para o Projeto', 'name');
                           } else if (workspaceInput.text.length < 3) {
                             errorLabel.setErrorMenssage(
-                                'Digite ao menos 3 caracteres');
+                                'Digite ao menos 3 caracteres', 'name');
                           } else {
                             final projectsList =
                                 context.read<WorkspaceProvider>();
-                            errorLabel.setErrorMenssage('');
+                            errorLabel.clearErrorMenssage();
 
                             projectsList
                                 .addBoardToWorkspace(workspaceInput.text);
@@ -116,7 +115,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           final errorLabel =
                               context.read<TextFieldController>();
                           if (errorLabel.errorInput != '') {
-                            errorLabel.setErrorMenssage('');
+                            errorLabel.clearErrorMenssage();
                           }
                           Navigator.of(context).pop();
                         }),

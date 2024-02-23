@@ -3,6 +3,7 @@ import 'package:kandoard/components/add_workspace_dialog.dart';
 import 'package:kandoard/components/workspace_card.dart';
 import 'package:kandoard/provider/workspace_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -44,6 +45,9 @@ class HomeViewState extends State<HomeView>   {
         ),
         backgroundColor: AppColors.blue,
         automaticallyImplyLeading: false,
+        actions: [IconButton(onPressed: (){
+          Navigator.popAndPushNamed(context, '/login');
+        }, icon: Icon(Icons.logout, color: AppColors.white,))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -51,11 +55,11 @@ class HomeViewState extends State<HomeView>   {
             child: Column(
           children: [
             SizedBox(
-                height: 54,
+                // height: 54,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                       backgroundColor: AppColors.blue,
                     ),
                     child: const Padding(

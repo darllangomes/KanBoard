@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 
 
 // ignore: must_be_immutable
@@ -19,7 +20,7 @@ class WorkspaceCard extends StatelessWidget {
           side: BorderSide(
             color: AppColors.blue,
           ),
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         splashColor: AppColors.blue,

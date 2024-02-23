@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/workspace_provider.dart';
@@ -39,7 +40,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           fontWeight: FontWeight.w300,
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                       ),
                     ),
                     const SizedBox(
@@ -59,7 +60,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.blue,
                         ),
                         child: const Text(
@@ -101,7 +102,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               side: BorderSide(color: AppColors.blue),
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.grey,
                         ),
                         child: const Text(

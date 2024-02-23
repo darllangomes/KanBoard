@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import '../services/register_service.dart';
 
 class RegisterView extends StatefulWidget {
@@ -99,7 +100,7 @@ class RegisterViewState extends State<RegisterView> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.blue,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius))),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             String nome = textFieldController
@@ -163,7 +164,7 @@ class RegisterViewState extends State<RegisterView> {
                             backgroundColor: AppColors.grey,
                             side: BorderSide(color: AppColors.blue),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius))),
                         onPressed: () =>
                             Navigator.popAndPushNamed(context, '/login'),
                         child: Text(

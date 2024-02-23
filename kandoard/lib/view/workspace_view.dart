@@ -3,6 +3,7 @@ import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 import '../components/board_card.dart';
 
@@ -65,7 +66,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                         backgroundColor: AppColors.blue),
                     child: Row(
                       children: [
@@ -80,7 +81,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                           'Adicionar participantes',
                           style: TextStyle(
                               color: AppColors.grey,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),

@@ -5,6 +5,7 @@ import 'package:kandoard/components/custom_text_field.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/services/login_service.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -28,17 +29,17 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.only(left: 26.0, right: 26),
               child: Column(
                 children: [
-                  const Text.rich(TextSpan(children: [
+                  Text.rich(TextSpan(children: [
                     TextSpan(
                         text: 'Login no ',
                         style: TextStyle(
-                            color: Color(0xFF7398C8),
+                            color: AppColors.blue,
                             fontWeight: FontWeight.w300,
                             fontSize: 24)),
                     TextSpan(
                         text: 'KanBoard',
                         style: TextStyle(
-                            color: Color(0xFF7398C8),
+                            color: AppColors.blue,
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.italic,
                             fontSize: 24))
@@ -71,10 +72,10 @@ class _LoginViewState extends State<LoginView> {
                       },
                       child: Stack(
                         children: [
-                          const Text(
+                          Text(
                             'Esqueci minha senha',
                             style: TextStyle(
-                              color: Color(0xFF7398C8),
+                              color: AppColors.blue,
                               fontWeight: FontWeight.w300,
                               fontSize: 16,
                             ),
@@ -85,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                             right: 2,
                             child: Container(
                               height: 1,
-                              color: const Color(0xFF7398C8),
+                              color: AppColors.blue,
                             ),
                           )
                         ],
@@ -102,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.blue,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius))),
                         onPressed: () async {
                           if (_LoginformKey.currentState!.validate()) {
                             String email =
@@ -144,10 +145,10 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text(
+                  Text(
                     'Não possui uma conta?',
                     style: TextStyle(
-                        color: Color(0XFFD9D9D9),
+                        color: AppColors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w300),
                   ),
@@ -162,7 +163,7 @@ class _LoginViewState extends State<LoginView> {
                             backgroundColor: AppColors.grey,
                             side: BorderSide(color: AppColors.blue),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius))),
                         onPressed: () =>
                             Navigator.popAndPushNamed(context, '/register'),
                         child: Text(
@@ -192,7 +193,7 @@ class _LoginViewState extends State<LoginView> {
               backgroundColor: AppColors.grey,
               title: Text(
                 message.toString(),
-                style: TextStyle(color: Color(0xFF7398C8)),
+                style: TextStyle(color: AppColors.blue),
               ));
         });
   }

@@ -6,6 +6,7 @@ import 'package:kandoard/controller/column_color_controller.dart';
 import 'package:kandoard/model/board_model.dart';
 import 'package:kandoard/provider/column_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
 
 class KanbanBoardView extends StatefulWidget {
@@ -63,7 +64,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                     backgroundColor: AppColors.blue),
                 child: Row(
                   children: [
@@ -112,7 +113,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                           columns[index].columnWip,
                                           columns[index].cards.length),
                                     ),
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                                 child: SizedBox(
                                     width: 375,
                                     child: Padding(
@@ -137,7 +138,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                 .length),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(5)),
+                                                                .circular(AppMeasures.borderRadius)),
                                                     child: Center(
                                                       child: Text(
                                                         columns[index]

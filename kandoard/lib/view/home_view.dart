@@ -62,20 +62,21 @@ class HomeViewState extends State<HomeView>   {
                           borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                       backgroundColor: AppColors.blue,
                     ),
-                    child: const Padding(
+                    child:Padding(
                       padding: EdgeInsets.only(left: 26.0, right: 26.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Icon(Icons.add,
+                              color: AppColors.grey),
                           Text(
                             'Criar Novo Projeto',
                             style: TextStyle(
-                                color: Color.fromARGB(255, 52, 52, 52),
-                                fontSize: 24,
+                                color: AppColors.grey,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w300),
                           ),
-                          Icon(Icons.add,
-                              color: Color.fromARGB(255, 52, 52, 52)),
+                          
                         ],
                       ),
                     ),

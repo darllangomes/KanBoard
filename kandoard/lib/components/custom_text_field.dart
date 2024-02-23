@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
+import 'package:kandoard/shared/app_measures.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
@@ -56,7 +57,7 @@ class CustomTextField extends StatelessWidget {
               fontWeight: FontWeight.w300,
             ),
             border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+                OutlineInputBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius))),
       ),
     );
   }

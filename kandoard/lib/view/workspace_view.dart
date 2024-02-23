@@ -80,6 +80,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                         Text(
                           'Adicionar participantes',
                           style: TextStyle(
+                              fontSize: 16,
                               color: AppColors.grey,
                               fontWeight: FontWeight.w300),
                         ),

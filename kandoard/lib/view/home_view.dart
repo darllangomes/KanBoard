@@ -63,7 +63,7 @@ class HomeViewState extends State<HomeView>   {
                       backgroundColor: AppColors.blue,
                     ),
                     child:Padding(
-                      padding: EdgeInsets.only(left: 26.0, right: 26.0),
+                      padding: const EdgeInsets.only(left: 26.0, right: 26.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

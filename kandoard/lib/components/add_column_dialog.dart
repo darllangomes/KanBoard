@@ -15,6 +15,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
           title: const Text(
             'Adicionar Coluna',
             style: TextStyle(color: Color(0xFF7398C8)),

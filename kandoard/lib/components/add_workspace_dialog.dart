@@ -14,6 +14,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
           title: const Text(
             'Criar Novo Projeto',
             style: TextStyle(color: Color(0xFF7398C8)),

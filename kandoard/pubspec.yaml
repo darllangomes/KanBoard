@@ -39,6 +39,8 @@ dependencies:
   test: ^1.24.9
   dio: ^5.4.0
   jwt_decoder: ^2.0.1
+  fl_chart: ^0.66.2
+
 
 
 dev_dependencies:

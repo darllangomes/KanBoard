@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/add_board_dialog.dart';
+import 'package:kandoard/components/add_member_dialog.dart';
+import 'package:kandoard/model/user_model.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
+import 'package:kandoard/provider/user_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +30,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
           ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
       Provider.of<BoardProvider>(context, listen: false)
           .getUserBoards(workspace.getWorkspaceId);
+      Provider.of<UserProvider>(context,listen: false);
     });
   }
 
@@ -34,7 +38,15 @@ class WorkspaceViewState extends State<WorkspaceView> {
   Widget build(BuildContext context) {
     final workspace =
         ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
-
+     
+         List<User> teste=[];
+           final response = Provider.of<UserProvider>(context,listen: false).getUsers().then((value) => 
+        {print('usuarios encontrados'),
+        teste = Provider.of<UserProvider>(context,listen: false).getUserList
+        }
+        );
+        
+    //final arrayUsers = 
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
@@ -87,7 +99,8 @@ class WorkspaceViewState extends State<WorkspaceView> {
                       ],
                     ),
                     onPressed: () {
-                      print('Adicionar Participante');
+                     // print('Adicionar Participante');
+                      addMemberDialog(context, teste);
                     }),
                 IconButton(
                     onPressed: () {

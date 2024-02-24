@@ -33,17 +33,17 @@ class RegisterViewState extends State<RegisterView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text.rich(TextSpan(children: [
+                  Text.rich(TextSpan(children: [
                     TextSpan(
                         text: 'Cadastro no ',
                         style: TextStyle(
-                            color: Color(0xFF7398C8),
+                            color: AppColors.blue,
                             fontWeight: FontWeight.w300,
                             fontSize: 24)),
                     TextSpan(
                         text: 'KanBoard',
                         style: TextStyle(
-                            color: Color(0xFF7398C8),
+                            color: AppColors.blue,
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.italic,
                             fontSize: 24))
@@ -138,7 +138,7 @@ class RegisterViewState extends State<RegisterView> {
                         child: Text(
                           "Cadastrar",
                           style: TextStyle(
-                              color: AppColors.white,
+                              color: AppColors.grey,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         )),
@@ -146,10 +146,10 @@ class RegisterViewState extends State<RegisterView> {
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text(
+                  Text(
                     'Já possui uma conta?',
                     style: TextStyle(
-                        color: Color(0XFFD9D9D9),
+                        color: AppColors.blue,
                         fontSize: 20,
                         fontWeight: FontWeight.w300),
                   ),

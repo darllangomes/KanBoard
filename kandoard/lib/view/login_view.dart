@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
+import 'package:kandoard/components/login_status_dialog.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/services/login_service.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -137,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              color: AppColors.white,
+                              color: AppColors.grey,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         )),
@@ -148,8 +149,8 @@ class _LoginViewState extends State<LoginView> {
                   Text(
                     'Não possui uma conta?',
                     style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 20,
+                        color: AppColors.blue,
+                        fontSize: 16,
                         fontWeight: FontWeight.w300),
                   ),
                   const SizedBox(
@@ -182,19 +183,5 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
-
-  //TODO: separar esse widget em outra página
-  Future<void> LoginStatus(BuildContext context, String message) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              backgroundColor: AppColors.grey,
-              title: Text(
-                message.toString(),
-                style: TextStyle(color: AppColors.blue),
-              ));
-        });
-  }
+  
 }

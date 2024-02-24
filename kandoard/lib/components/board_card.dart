@@ -40,14 +40,14 @@ class BoardCard extends StatelessWidget {
                       Text(
                         'Board: ',
                         style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColors.blue,
                             fontSize: 20,
                             fontWeight: FontWeight.w200),
                       ),
                       Text(
                         boardContent.boardName,
                         style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColors.blue,
                             fontSize: 20,
                             fontWeight: FontWeight.w200),
                       ),

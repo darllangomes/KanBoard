@@ -39,7 +39,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.white),
+        iconTheme: IconThemeData(color: AppColors.grey),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -49,13 +49,13 @@ class _KanbanBoardState extends State<KanbanBoardView> {
         title: Text(
           boardContent.boardName,
           style: TextStyle(
-              color: AppColors.white,
+              color: AppColors.grey,
               fontSize: 24,
               fontWeight: FontWeight.w200,
               fontStyle: FontStyle.italic),
         ),
         backgroundColor: AppColors.blue,
-        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.white,))]
+        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.grey,))]
       ),
       body: Column(
         children: [
@@ -187,6 +187,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                   final cards =
                                                       columns[index].cards;
                                                   return Card(
+                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                                                       color: cardColor(
                                                           cards[indexCard]
                                                               .cardPriority),

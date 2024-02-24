@@ -39,7 +39,7 @@ class WorkspaceCard extends StatelessWidget {
                   child: Text(
                     workspace.getWorkspaceName,
                     style: TextStyle(
-                        color: AppColors.white,
+                        color: AppColors.blue,
                         fontSize: 20,
                         fontWeight: FontWeight.w200),
                   ),

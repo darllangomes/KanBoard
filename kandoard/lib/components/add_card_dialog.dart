@@ -29,7 +29,7 @@ Future<void> addCardDialog(BuildContext context) {
                 return Column(
                   children: [
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnName,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''
@@ -49,7 +49,7 @@ Future<void> addCardDialog(BuildContext context) {
                       height: 20,
                     ),
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnDescription,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['description'] == ''
@@ -69,7 +69,7 @@ Future<void> addCardDialog(BuildContext context) {
                       height: 20,
                     ),
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnWip,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['wip'] == ''

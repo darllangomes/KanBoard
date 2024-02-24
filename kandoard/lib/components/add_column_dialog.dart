@@ -16,9 +16,9 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-          title: const Text(
+          title: Text(
             'Adicionar Coluna',
-            style: TextStyle(color: Color(0xFF7398C8)),
+            style: TextStyle(color: AppColors.blue),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                 return Column(
                   children: [
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnName,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''
@@ -49,7 +49,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                       height: 20,
                     ),
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnDescription,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['description'] == ''
@@ -69,7 +69,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                       height: 20,
                     ),
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: columnWip,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['wip'] == ''
@@ -102,10 +102,10 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                               borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.blue,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Criar',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 52, 52, 52),
+                              color: AppColors.grey,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         ),
@@ -150,10 +150,10 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                               borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.grey,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Cancelar',
                           style: TextStyle(
-                              color: Color(0xFF7398C8),
+                              color: AppColors.blue,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         ),

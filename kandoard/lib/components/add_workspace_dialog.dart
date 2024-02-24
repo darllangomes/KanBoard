@@ -15,9 +15,9 @@ Future<void> addWorkspaceDialog(BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-          title: const Text(
+          title: Text(
             'Criar Novo Projeto',
-            style: TextStyle(color: Color(0xFF7398C8)),
+            style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.w300),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -28,7 +28,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                 return Column(
                   children: [
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.grey),
                       controller: workspaceInput,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''
@@ -64,10 +64,10 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                               borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.blue,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Criar',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 52, 52, 52),
+                              color: AppColors.grey,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         ),
@@ -106,10 +106,10 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                               borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                           backgroundColor: AppColors.grey,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Cancelar',
                           style: TextStyle(
-                              color: Color(0xFF7398C8),
+                              color: AppColors.blue,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         ),

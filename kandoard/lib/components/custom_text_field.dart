@@ -44,15 +44,16 @@ class CustomTextField extends StatelessWidget {
         onChanged: (text) {},
         obscureText: isObscureText,
         keyboardType: keyboardInputType,
-        style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w300),
+        style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.w300),
         decoration: InputDecoration(
             prefixIcon: Icon(
               labelIcon,
-              color: AppColors.white,
+              color: AppColors.blue,
+              grade: 2,
             ),
             labelText: label,
             labelStyle: TextStyle(
-              color: AppColors.white,
+              color: AppColors.blue,
               fontSize: 20,
               fontWeight: FontWeight.w300,
             ),

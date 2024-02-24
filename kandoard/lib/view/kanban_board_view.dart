@@ -39,24 +39,32 @@ class _KanbanBoardState extends State<KanbanBoardView> {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.white),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
-        actionsIconTheme: const IconThemeData(),
-        title: Text(
-          boardContent.boardName,
-          style: TextStyle(
-              color: AppColors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w200,
-              fontStyle: FontStyle.italic),
-        ),
-        backgroundColor: AppColors.blue,
-        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.white,))]
-      ),
+          iconTheme: IconThemeData(color: AppColors.white),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back)),
+          actionsIconTheme: const IconThemeData(),
+          title: Text(
+            boardContent.boardName,
+            style: TextStyle(
+                color: AppColors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w200,
+                fontStyle: FontStyle.italic),
+          ),
+          backgroundColor: AppColors.blue,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/charts');
+                },
+                icon: Icon(
+                  Icons.bar_chart,
+                  color: AppColors.white,
+                ))
+          ]),
       body: Column(
         children: [
           Padding(
@@ -64,7 +72,8 @@ class _KanbanBoardState extends State<KanbanBoardView> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                        borderRadius:
+                            BorderRadius.circular(AppMeasures.borderRadius)),
                     backgroundColor: AppColors.blue),
                 child: Row(
                   children: [
@@ -113,7 +122,8 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                           columns[index].columnWip,
                                           columns[index].cards.length),
                                     ),
-                                    borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                                    borderRadius: BorderRadius.circular(
+                                        AppMeasures.borderRadius)),
                                 child: SizedBox(
                                     width: 375,
                                     child: Padding(
@@ -136,9 +146,9 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                             columns[index]
                                                                 .cards
                                                                 .length),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(AppMeasures.borderRadius)),
+                                                        borderRadius: BorderRadius
+                                                            .circular(AppMeasures
+                                                                .borderRadius)),
                                                     child: Center(
                                                       child: Text(
                                                         columns[index]
@@ -165,7 +175,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
-                                                    // addCardDialog(context);
+                                                    addCardDialog(context);
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -206,12 +216,10 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                               cards[indexCard]
                                                                   .setPressed(
                                                                       true);
-                                                             
                                                             } else {
                                                               cards[indexCard]
                                                                   .setPressed(
                                                                       false);
-                                                              
                                                             }
 
                                                             setState(() {});
@@ -255,13 +263,13 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                                       ? IconButton(
                                                                           onPressed:
                                                                               () {
-                                                                            final switchCardColumn = context.read<ColumnProvider>();
+                                                                            final switchCardColumn =
+                                                                                context.read<ColumnProvider>();
                                                                             cards[indexCard].setPressed(false);
-                                                                            setState(() {
-                                                                              
-                                                                            });
-                                                                            switchCardColumn.changeCardtoNextColumn(card: cards[indexCard], indexCard: indexCard);
-                                                                            
+                                                                            setState(() {});
+                                                                            switchCardColumn.changeCardtoNextColumn(
+                                                                                card: cards[indexCard],
+                                                                                indexCard: indexCard);
                                                                           },
                                                                           icon: const Icon(Icons
                                                                               .arrow_forward))

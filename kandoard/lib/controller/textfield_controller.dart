@@ -6,7 +6,7 @@ class TextFieldController extends ChangeNotifier {
   final TextEditingController passwordConfirmController =
       TextEditingController();
   final TextEditingController genericTextController = TextEditingController();
-  final Map<String, String> _errorInput = {'name' : '', 'description' : '', 'wip' : ''};
+  final Map<String, String> _errorInput = {'name' : '', 'description' : '', 'wip' : '', 'date' : ''};
   Map<String, String> get errorInput => _errorInput;
 
   String getEmailFromTextField() {

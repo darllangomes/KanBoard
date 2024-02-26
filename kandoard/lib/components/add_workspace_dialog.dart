@@ -28,7 +28,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                 return Column(
                   children: [
                     TextFormField(
-                      style: TextStyle(color: AppColors.grey),
+                      style: TextStyle(color: AppColors.blue),
                       controller: workspaceInput,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''

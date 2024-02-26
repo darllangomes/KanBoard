@@ -8,7 +8,7 @@ class CardService {
 
   Future<List<CardModel>> getAllCards() async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
     try {
       final response =
           await dio.get('https://kanbanboard-nj8m.onrender.com/api/card');
@@ -42,12 +42,13 @@ class CardService {
       List cardMembers = const [],
       List cardLabels = const []}) async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
     try {
       final response = await dio
           .post('https://kanbanboard-nj8m.onrender.com/api/card', data: {
         'columnId': columnId,
         'description': cardDescription,
+        'dueDate': cardDueDate,
         'comments': cardComments,
         'priority': cardPriority,
         'title': cardTitle,

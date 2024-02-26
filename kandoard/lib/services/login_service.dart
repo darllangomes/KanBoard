@@ -12,6 +12,7 @@ Future<String> loginUser({required userEmail, required userPassword}) async {
   
     //TODO: implementar logica que faça a requisção GetOne da API, para pegar a informação userName do usuario
     User user = User(userEmail: userEmail, userId: response.toString(), userName: '');
+    
     UserLogged.add(user);
     if(response.statusCode == 200 || response.statusCode == 201) {
       return 'Login';

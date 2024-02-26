@@ -224,6 +224,7 @@ Future<void> addCardDialog(BuildContext context) {
                                 columnCreatedAt: date.toString(),
                                 columnUpdatedAt: date.toString(),
                                 columnWip: int.parse(columnWip.text));*/
+                                print('Prioridade: ${cardPriority.characters}, Membro: ${cardMember.characters}, Data: ${cardFinalDate.text}, Titulo: ${cardTitle.text}, Descrição: ${cardDescription.text}');
 
                               Navigator.of(context).pop();
                             }

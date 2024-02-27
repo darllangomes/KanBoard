@@ -30,8 +30,6 @@ class ColumnService {
   Future<ColumnModel> postColumn({required String columnName,
       required String boardId,
       required String columnDescription,
-      required String columnCreatedAt,
-      required String columnUpdatedAt,
       required int columnWip}) async {
     try {
       dio.options.headers['Authorization'] =
@@ -41,8 +39,6 @@ class ColumnService {
         "name": columnName,
         "boardId": boardId,
         "description": columnDescription,
-        "createdAt": columnCreatedAt,
-        "updatedAt": columnUpdatedAt,
         "wip": columnWip
       });
       

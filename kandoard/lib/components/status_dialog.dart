@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 
-Future<void> LoginStatus(BuildContext context, String message) {
+Future<void> statusDialog(BuildContext context, String message) {
     return showDialog(
         context: context,
         barrierDismissible: false,

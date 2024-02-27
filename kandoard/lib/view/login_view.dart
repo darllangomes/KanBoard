@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
-import 'package:kandoard/components/login_status_dialog.dart';
+import 'package:kandoard/components/status_dialog.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/services/login_service.dart';
 import 'package:kandoard/shared/app_colors.dart';
@@ -112,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                             String senha =
                                 textFieldController.getPasswordFromTextField();
 
-                            LoginStatus(context, 'Conectando...');
+                            statusDialog(context, 'Conectando...');
                             String loginStatus = await loginUser(
                                 userEmail: email, userPassword: senha);
 
@@ -122,7 +122,7 @@ class _LoginViewState extends State<LoginView> {
                                   Navigator.popAndPushNamed(
                                       context, '/home');
                                 } else {
-                                  LoginStatus(context, loginStatus);
+                                  statusDialog(context, loginStatus);
                                   Timer timer =
                                       Timer(Duration(milliseconds: 3500), () {
                                     Navigator.of(context, rootNavigator: true)

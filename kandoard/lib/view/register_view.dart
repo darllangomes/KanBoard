@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/custom_text_field.dart';
+import 'package:kandoard/components/status_dialog.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
@@ -110,7 +111,7 @@ class RegisterViewState extends State<RegisterView> {
                             String senha =
                                 textFieldController.getPasswordFromTextField();
 
-                            RegisterStatus(context, 'Carregando...');
+                            statusDialog(context, 'Carregando...');
 
                             String statusRegister = await registerUser(
                                 userName: nome,
@@ -124,7 +125,7 @@ class RegisterViewState extends State<RegisterView> {
                               
 
                               if (context.mounted) {
-                                RegisterStatus(context, statusRegister);
+                              statusDialog(context, statusRegister);
                                 Timer timer =
                                     Timer(const Duration(milliseconds: 3500), () {
                                   Navigator.of(context, rootNavigator: true)
@@ -182,20 +183,5 @@ class RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
-  }
-
-  //TODO: separar esse widget em outra página
-  Future<void> RegisterStatus(BuildContext context, String message) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              backgroundColor: AppColors.grey,
-              title: Text(
-                message.toString(),
-                style: TextStyle(color: Color(0xFF7398C8)),
-              ));
-        });
   }
 }

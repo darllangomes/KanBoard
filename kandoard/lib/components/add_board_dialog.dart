@@ -14,10 +14,30 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-          title: Text(
-            'Criar Novo Quadro',
-            style: TextStyle(color: AppColors.blue),
-          ),
+          title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Criar Novo Quadro',
+                          style:
+                              TextStyle(color: AppColors.blue, fontSize: 20)),
+                          IconButton(
+                              onPressed: () {
+                                 final errorLabel =
+                                context.read<TextFieldController>();
+                            if (errorLabel.errorInput != '') {
+                              errorLabel.clearErrorMenssage();
+                            }
+                            Navigator.of(context).pop();
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: AppColors.blue,
+                              ))
+                        ],
+                      ),
+          
+          
+         
           content: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +88,6 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
               }),
               const SizedBox(height: 40),
               Row(
-                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
@@ -120,31 +139,6 @@ Future<void> addBoardDialog(BuildContext context, String workspaceId) {
                   ),
                   const SizedBox(
                     width: 15,
-                  ),
-                  SizedBox(
-                    height: 54,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(color: AppColors.blue),
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-                          backgroundColor: AppColors.grey,
-                        ),
-                        child: Text(
-                          'Cancelar',
-                          style: TextStyle(
-                              color: AppColors.blue,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300),
-                        ),
-                        onPressed: () {
-                          final errorLabel =
-                              context.read<TextFieldController>();
-                          if (errorLabel.errorInput != '') {
-                            errorLabel.clearErrorMenssage();
-                          }
-                          Navigator.of(context).pop();
-                        }),
                   ),
                 ],
               ),

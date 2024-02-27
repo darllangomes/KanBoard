@@ -15,16 +15,40 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-          title: Text(
-            'Adicionar Coluna',
-            style: TextStyle(color: AppColors.blue),
-          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+        title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                     Text(
+                  'Adicionar Coluna',
+                  style: TextStyle(color: AppColors.blue, fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                    IconButton(
+                        onPressed: () {
+                          final errorLabel =
+                              context.read<TextFieldController>();
+                          if (errorLabel.errorInput != '') {
+                            errorLabel.clearErrorMenssage();
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          color: AppColors.blue,
+                        ))
+                  ],
+                ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                
+               
                 Consumer<TextFieldController>(
                     builder: (context, errorValue, child) {
                   return Column(
@@ -43,7 +67,8 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                             fontWeight: FontWeight.w300,
                           ),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                              borderRadius: BorderRadius.circular(
+                                  AppMeasures.borderRadius)),
                         ),
                       ),
                       const SizedBox(
@@ -63,7 +88,8 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                             fontWeight: FontWeight.w300,
                           ),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                              borderRadius: BorderRadius.circular(
+                                  AppMeasures.borderRadius)),
                         ),
                       ),
                       const SizedBox(
@@ -83,7 +109,8 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                             fontWeight: FontWeight.w300,
                           ),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                              borderRadius: BorderRadius.circular(
+                                  AppMeasures.borderRadius)),
                         ),
                       ),
                     ],
@@ -91,7 +118,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                 }),
                 const SizedBox(height: 40),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
+                
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
@@ -100,7 +127,8 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                                borderRadius: BorderRadius.circular(
+                                    AppMeasures.borderRadius)),
                             backgroundColor: AppColors.blue,
                           ),
                           child: Text(
@@ -117,24 +145,32 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                               errorLabel.clearErrorMenssage();
                               errorLabel.setErrorMenssage(
                                   'Digite um nome para a coluna', 'name');
+                            } else if (columnName.text.length < 3) {
+                              errorLabel.clearErrorMenssage();
+                              errorLabel.setErrorMenssage(
+                                  'Digite ao menos 3 letras', "name");
                             } else if (!RegExp(r'^-?[0-9]+$')
                                 .hasMatch(columnWip.text)) {
                               errorLabel.clearErrorMenssage();
                               errorLabel.setErrorMenssage(
                                   'Digite um número inteiro', 'wip');
+                            } else if (columnWip.text == '0') {
+                              errorLabel.clearErrorMenssage();
+                              errorLabel.setErrorMenssage(
+                                  'Digite um numero maior que zero', 'wip');
                             } else {
                               final date = DateTime.now();
-                              final projectsList = context.read<ColumnProvider>();
+
+                              final projectsList =
+                                  context.read<ColumnProvider>();
                               errorLabel.clearErrorMenssage();
-            
+
                               projectsList.setNewColumn(
                                   columnName: columnName.text,
                                   boardId: boardId,
                                   columnDescription: columnDescription.text,
-                                  columnCreatedAt: date.toString(),
-                                  columnUpdatedAt: date.toString(),
                                   columnWip: int.parse(columnWip.text));
-            
+
                               Navigator.of(context).pop();
                             }
                           }),
@@ -142,31 +178,7 @@ Future<void> addColumnDialog(BuildContext context, String boardId) {
                     const SizedBox(
                       width: 15,
                     ),
-                    SizedBox(
-                      height: 54,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(color: AppColors.blue),
-                                borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-                            backgroundColor: AppColors.grey,
-                          ),
-                          child: Text(
-                            'Cancelar',
-                            style: TextStyle(
-                                color: AppColors.blue,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w300),
-                          ),
-                          onPressed: () {
-                            final errorLabel =
-                                context.read<TextFieldController>();
-                            if (errorLabel.errorInput != '') {
-                              errorLabel.clearErrorMenssage();
-                            }
-                            Navigator.of(context).pop();
-                          }),
-                    ),
+                    
                   ],
                 ),
               ],

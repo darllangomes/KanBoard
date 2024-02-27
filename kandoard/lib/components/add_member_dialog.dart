@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
+import 'package:kandoard/model/member_model.dart';
 import 'package:kandoard/model/user_model.dart';
+import 'package:kandoard/provider/member_provider.dart';
 import 'package:kandoard/provider/user_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
+import 'package:test/test.dart';
 
-Future<void> addMemberDialog(BuildContext context, List<User> arrayUsers, ) async {
+Future<void> addMemberDialog(BuildContext context, List<User> arrayUsers,List<MemberModel> arrayMembers, MemberProvider memberProvider, String workspaceId ) async {
   final name = TextEditingController();
   final users = await arrayUsers;
-  print(users);
+  final members = await arrayMembers;
+  print('users: $users');
+  print('members: $members');
+
+
 
   return showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
+       if(context.mounted){
+     return AlertDialog(
         backgroundColor: AppColors.grey,
         title: const Text(
           'Adicionar Membro',
@@ -32,13 +40,13 @@ Future<void> addMemberDialog(BuildContext context, List<User> arrayUsers, ) asyn
                    optionsBuilder: (TextEditingValue textEditingValue) {
     final String query = textEditingValue.text.toLowerCase();
     return users
-        .where((user) => user.getUserName.toLowerCase().contains(query))
-        .map((user) => user.getUserName)
+        .where((user) => user.getUserEmail.toLowerCase().contains(query))
+        .map((user) => user.getUserEmail)
         .toList();
   },
-  onSelected: (String selectedUserName) {
-    print('Usuário selecionado: $selectedUserName');
-    name.text = selectedUserName;
+  onSelected: (String selectedEmail) {
+    print('Email selecionado: $selectedEmail');
+    name.text = selectedEmail;
   },),
                     /* TextFormField(
                       style: TextStyle(color: AppColors.white),
@@ -91,16 +99,22 @@ Future<void> addMemberDialog(BuildContext context, List<User> arrayUsers, ) asyn
                         ),
                         onPressed: () {
                           final errorLabel = context.read<TextFieldController>();
+                          var isAlreadyInMembers = false;
+                          members.forEach((element) { element.getUserEmail == name.text ? isAlreadyInMembers = true :  isAlreadyInMembers = false; });
                           if (name.text.isEmpty) {
                             errorLabel.setErrorMenssage(
                                 'Digite um nome para a coluna', 'name');
                           } else if (name.text.length < 3) {
                             errorLabel.setErrorMenssage(
                                 'Digite ao menos 3 caracteres', 'name');
-                          } else {
+                          } else if(isAlreadyInMembers){
+                               errorLabel.setErrorMenssage(
+                                'Esse usuário já está no time', 'name');
+                          } else{
                             // lógica de adcionar
                             var userId = '-1';
-                              users.forEach((element) {element.getUserName == name.text ? userId = element.getUserId : userId = '-1';});
+                              users.forEach((element) {element.getUserEmail == name.text ? userId = element.getUserId : userId = '-1';});
+                              memberProvider.addMembers(workspaceId,"admin",userId);
                               print('userId: ${ userId}');
                           }
                         },
@@ -143,6 +157,9 @@ Future<void> addMemberDialog(BuildContext context, List<User> arrayUsers, ) asyn
           },
         ),
       );
+  }else{
+    throw 'Erro ao renderizar dialog';
+  }
     },
   );
 }

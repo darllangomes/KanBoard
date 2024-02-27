@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/add_board_dialog.dart';
 import 'package:kandoard/components/add_member_dialog.dart';
+import 'package:kandoard/model/member_model.dart';
 import 'package:kandoard/model/user_model.dart';
 import 'package:kandoard/model/workspace_model.dart';
 import 'package:kandoard/provider/board_provider.dart';
+import 'package:kandoard/provider/member_provider.dart';
 import 'package:kandoard/provider/user_provider.dart';
+import 'package:kandoard/services/member_service.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +34,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
       Provider.of<BoardProvider>(context, listen: false)
           .getUserBoards(workspace.getWorkspaceId);
       Provider.of<UserProvider>(context,listen: false);
+      Provider.of<MemberProvider>(context, listen:false);
     });
   }
 
@@ -40,13 +44,23 @@ class WorkspaceViewState extends State<WorkspaceView> {
         ModalRoute.of(context)!.settings.arguments as WorkspaceModel;
      
          List<User> teste=[];
-           final response = Provider.of<UserProvider>(context,listen: false).getUsers().then((value) => 
-        {print('usuarios encontrados'),
-        teste = Provider.of<UserProvider>(context,listen: false).getUserList
-        }
-        );
+         final response = Provider.of<UserProvider>(context,listen: false)
+           .getUsers().then((value) => {
+              /* print('usuarios encontrados'), */
+              teste = Provider.of<UserProvider>(context,listen: false).getUserList
+            }
+         );
+         List<MemberModel> memberList = [];
+         final memberProvider = Provider.of<MemberProvider>(context,listen: false);
+         Provider.of<MemberProvider>(context, listen: false).getAllMembers()
+         .then((value) => {
+          memberList = Provider.of<MemberProvider>(context, listen:false).getMemberList,
+           print('membros encontrados')
+         });
         
-    //final arrayUsers = 
+         print (memberList);
+        
+   
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
@@ -100,7 +114,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                     ),
                     onPressed: () {
                      // print('Adicionar Participante');
-                      addMemberDialog(context, teste);
+                      addMemberDialog(context, teste, memberList,memberProvider, workspace.getWorkspaceId);
                     }),
                 IconButton(
                     onPressed: () {

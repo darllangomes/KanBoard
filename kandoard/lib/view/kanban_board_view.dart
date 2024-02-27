@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/components/add_card_dialog.dart';
+import 'package:kandoard/components/card/add_card_dialog.dart';
 import 'package:kandoard/components/add_column_dialog.dart';
-import 'package:kandoard/components/view_card_content_dialog.dart';
+import 'package:kandoard/components/card/view_card_content_dialog.dart';
 import 'package:kandoard/controller/card_color_controller.dart';
 import 'package:kandoard/controller/column_color_controller.dart';
 import 'package:kandoard/model/board_model.dart';
@@ -199,7 +199,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                       child: InkWell(
                                                         onTap: () {
                                                           //TODO: abrir tela que mostra as informacoes do card, e as opçoes de editar e excluir
-                                                          ViewCardContent(context, card: columns[index].cards[indexCard]);
+                                                          viewCardContent(context, card: columns[index].cards[indexCard]);
                                                           print('Clicado');
                                                         },
                                                         onLongPress: () {

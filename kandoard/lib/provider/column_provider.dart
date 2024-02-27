@@ -95,4 +95,12 @@ class ColumnProvider extends ChangeNotifier {
 
     
   }
+
+  Future<void> deleteCardFromColumn({required CardModel card}) async {
+    final indexColuna = _columns.indexOf(_columns.where((columns) => columns.getColumnId == card.getcolumnId).first);
+    final response = await _cardService.deleteCard(cardId: card.getCardId);
+
+    _columns[indexColuna].cards.remove(card);
+    notifyListeners();
+  }
 }

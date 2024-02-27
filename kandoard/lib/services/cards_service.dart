@@ -88,4 +88,18 @@ class CardService {
     throw 'Não foi possivel mudar card de coluna';
   } 
 
+  Future<CardModel> deleteCard({required int cardId}) async {
+
+     try {
+      final response =
+        await dio.delete('https://kanbanboard-nj8m.onrender.com/api/card/$cardId');
+      final deletedCard = CardModel.fromMap(response.data);
+
+      return deletedCard;
+  } on DioException catch (e) {
+      print(e.response);
+    }
+    throw 'Não foi possivel mudar card de coluna';
+  } 
+
 }

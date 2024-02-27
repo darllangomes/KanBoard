@@ -39,8 +39,6 @@ class ColumnProvider extends ChangeNotifier {
       {required String columnName,
       required String boardId,
       required String columnDescription,
-      required String columnCreatedAt,
-      required String columnUpdatedAt,
       required int columnWip}) async {
     isLoading = true;
     notifyListeners();
@@ -49,8 +47,6 @@ class ColumnProvider extends ChangeNotifier {
         columnName: columnName,
         boardId: boardId,
         columnDescription: columnDescription,
-        columnCreatedAt: columnCreatedAt,
-        columnUpdatedAt: columnUpdatedAt,
         columnWip: columnWip);
 
     _columns.add(response);
@@ -58,26 +54,25 @@ class ColumnProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addNewCardToColumn() async {
+  Future<void> addNewCardToColumn({required String columnId, String description = '', required String cardDueDate, required String cardPriority, required String cardTitle, cardMembers = const []}) async {
    
     final response = await _cardService.createCard(
-        cardTitle: 'Soy yo', //campo Obrigatorio
-        cardDescription: 'cardDescription', 
-        cardPriority: 'low', //campo Obrigatorio
+        cardTitle: cardTitle, //campo Obrigatorio
+        cardDescription: description, 
+        cardPriority: cardPriority, //campo Obrigatorio
         cardCover: null,
         cardArchived: false,
-        cardDueDate: null,
-        columnId: 'clsxh18hj0005wd4whlxevuxd', //campo Obrigatorio
+        cardDueDate: cardDueDate, //campo obrigatorio //mudar para pegar a data
+        columnId: columnId, //campo Obrigatorio
         cardComments: [],
         cardCreatedAt: 'cardCreatedAt', 
         cardUpdatedAt: 'cardUpdatedAt',
-        cardMembers: [], //campo Obrigatorio
+        cardMembers: cardMembers, //campo Obrigatorio
         cardLabels: []);
 
-    final teste = _columns.where((columns) => columns.columnId == response.columnId);
-    if (teste.isNotEmpty) {
-      print(teste);
-      teste.first.cards.add(response);
+    final selectedColumn = _columns.where((columns) => columns.columnId == response.columnId);
+    if (selectedColumn.isNotEmpty) {
+      selectedColumn.first.cards.add(response);
       notifyListeners();
     } else {
       print('Algo deu errado');
@@ -91,7 +86,7 @@ class ColumnProvider extends ChangeNotifier {
 
     final response = await _cardService.putSwitchColumn(cardId: card.getCardId, columnId: columnToMoveCardId, cardActivity: {"action": "move"});
     
-    // final cardToRemove = _columns[indexColunaAtual].cards[indexCard];
+    
     _columns[indexColunaAtual].cards.remove(card);
     notifyListeners();
 

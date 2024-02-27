@@ -33,7 +33,7 @@ class CardService {
       required String cardPriority,
       String? cardCover,
       required bool cardArchived,
-      String? cardDueDate,
+      required String cardDueDate,
       required String columnId,
       List cardComments = const [],
       Map<String, String> cardActivity = const {"action": "created"},
@@ -48,13 +48,13 @@ class CardService {
           .post('https://kanbanboard-nj8m.onrender.com/api/card', data: {
         'columnId': columnId,
         'description': cardDescription,
-        'dueDate': cardDueDate,
+        // 'dueDate': cardDueDate,
         'comments': cardComments,
         'priority': cardPriority,
         'title': cardTitle,
         'activity': cardActivity,
       });
-
+      
       final newCard = CardModel.fromMap(response.data);
 
       return newCard;

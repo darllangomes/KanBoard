@@ -8,7 +8,7 @@ class BoardService {
 
   Future<List<BoardModel>> boardGetAll({required String workspaceId}) async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
 
     try {
       final response = await dio.get(
@@ -33,7 +33,7 @@ class BoardService {
       required String workspaceId,
       required String description}) async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
 
     try {
       final response = await dio

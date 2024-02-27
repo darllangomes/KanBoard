@@ -8,7 +8,7 @@ class CardService {
 
   Future<List<CardModel>> getAllCards() async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
     try {
       final response =
           await dio.get('https://kanbanboard-nj8m.onrender.com/api/card');
@@ -33,7 +33,7 @@ class CardService {
       required String cardPriority,
       String? cardCover,
       required bool cardArchived,
-      String? cardDueDate,
+      required String cardDueDate,
       required String columnId,
       List cardComments = const [],
       Map<String, String> cardActivity = const {"action": "created"},
@@ -42,18 +42,19 @@ class CardService {
       List cardMembers = const [],
       List cardLabels = const []}) async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
     try {
       final response = await dio
           .post('https://kanbanboard-nj8m.onrender.com/api/card', data: {
         'columnId': columnId,
         'description': cardDescription,
+        'dueDate': cardDueDate,
         'comments': cardComments,
         'priority': cardPriority,
         'title': cardTitle,
         'activity': cardActivity,
       });
-
+      
       final newCard = CardModel.fromMap(response.data);
 
       return newCard;
@@ -82,6 +83,20 @@ class CardService {
     return card;
 
     } on DioException catch (e) {
+      print(e.response);
+    }
+    throw 'Não foi possivel mudar card de coluna';
+  } 
+
+  Future<CardModel> deleteCard({required int cardId}) async {
+
+     try {
+      final response =
+        await dio.delete('https://kanbanboard-nj8m.onrender.com/api/card/$cardId');
+      final deletedCard = CardModel.fromMap(response.data);
+
+      return deletedCard;
+  } on DioException catch (e) {
       print(e.response);
     }
     throw 'Não foi possivel mudar card de coluna';

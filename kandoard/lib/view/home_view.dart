@@ -35,10 +35,10 @@ class HomeViewState extends State<HomeView>   {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'KanBoard',
           style: TextStyle(
-              color: Color(0xFFD9D9D9),
+              color: AppColors.grey,
               fontSize: 24,
               fontWeight: FontWeight.w200,
               fontStyle: FontStyle.italic),
@@ -47,7 +47,7 @@ class HomeViewState extends State<HomeView>   {
         automaticallyImplyLeading: false,
         actions: [IconButton(onPressed: (){
           Navigator.popAndPushNamed(context, '/login');
-        }, icon: Icon(Icons.logout, color: AppColors.white,))],
+        }, icon: Icon(Icons.logout, color: AppColors.grey,))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),

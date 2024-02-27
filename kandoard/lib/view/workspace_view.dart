@@ -38,7 +38,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.white),
+        iconTheme: IconThemeData(color: AppColors.grey),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -48,7 +48,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
         title: Text(
           workspace.getWorkspaceName,
           style: TextStyle(
-              color: AppColors.white,
+              color: AppColors.grey,
               fontSize: 24,
               fontWeight: FontWeight.w200,
               fontStyle: FontStyle.italic),
@@ -97,6 +97,7 @@ class WorkspaceViewState extends State<WorkspaceView> {
                       Icons.add_box_outlined,
                       color: AppColors.blue,
                       size: 40,
+                      
                     )),
               ],
             ),

@@ -8,7 +8,7 @@ class ColumnService {
 
   Future<List<ColumnModel>> getAllColums({required String boardId}) async {
     dio.options.headers['Authorization'] =
-        "Bearer ${UserLogged.first.getUserId}";
+        "Bearer ${UserLogged.last.getUserId}";
     try {
       final response = await dio.get(
           'https://kanbanboard-nj8m.onrender.com/api/column?boardId=$boardId');
@@ -30,19 +30,15 @@ class ColumnService {
   Future<ColumnModel> postColumn({required String columnName,
       required String boardId,
       required String columnDescription,
-      required String columnCreatedAt,
-      required String columnUpdatedAt,
       required int columnWip}) async {
     try {
       dio.options.headers['Authorization'] =
-          "Bearer ${UserLogged.first.getUserId}";
+          "Bearer ${UserLogged.last.getUserId}";
       final response = await
           dio.post('https://kanbanboard-nj8m.onrender.com/api/column', data: {
         "name": columnName,
         "boardId": boardId,
         "description": columnDescription,
-        "createdAt": columnCreatedAt,
-        "updatedAt": columnUpdatedAt,
         "wip": columnWip
       });
       

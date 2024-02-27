@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kandoard/components/add_card_dialog.dart';
+import 'package:kandoard/components/card/add_card_dialog.dart';
 import 'package:kandoard/components/add_column_dialog.dart';
+import 'package:kandoard/components/card/view_card_content_dialog.dart';
 import 'package:kandoard/controller/card_color_controller.dart';
 import 'package:kandoard/controller/column_color_controller.dart';
 import 'package:kandoard/model/board_model.dart';
@@ -39,32 +40,24 @@ class _KanbanBoardState extends State<KanbanBoardView> {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-          iconTheme: IconThemeData(color: AppColors.white),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back)),
-          actionsIconTheme: const IconThemeData(),
-          title: Text(
-            boardContent.boardName,
-            style: TextStyle(
-                color: AppColors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w200,
-                fontStyle: FontStyle.italic),
-          ),
-          backgroundColor: AppColors.blue,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/charts');
-                },
-                icon: Icon(
-                  Icons.bar_chart,
-                  color: AppColors.white,
-                ))
-          ]),
+        iconTheme: IconThemeData(color: AppColors.grey),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
+        actionsIconTheme: const IconThemeData(),
+        title: Text(
+          boardContent.boardName,
+          style: TextStyle(
+              color: AppColors.grey,
+              fontSize: 24,
+              fontWeight: FontWeight.w200,
+              fontStyle: FontStyle.italic),
+        ),
+        backgroundColor: AppColors.blue,
+        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.grey,))]
+      ),
       body: Column(
         children: [
           Padding(
@@ -175,7 +168,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
-                                                    addCardDialog(context);
+                                                    addCardDialog(context, columns[index].getColumnId);
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -197,6 +190,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                   final cards =
                                                       columns[index].cards;
                                                   return Card(
+                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
                                                       color: cardColor(
                                                           cards[indexCard]
                                                               .cardPriority),
@@ -205,6 +199,7 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                       child: InkWell(
                                                         onTap: () {
                                                           //TODO: abrir tela que mostra as informacoes do card, e as opçoes de editar e excluir
+                                                          viewCardContent(context, card: columns[index].cards[indexCard]);
                                                           print('Clicado');
                                                         },
                                                         onLongPress: () {

@@ -14,9 +14,29 @@ Future<void> addWorkspaceDialog(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.grey,
-          title: const Text(
-            'Criar Novo Projeto',
-            style: TextStyle(color: Color(0xFF7398C8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Criar Novo Projeto',
+                style: TextStyle(
+                    color: AppColors.blue, fontSize: 20),
+              ),
+              IconButton(
+                  onPressed: () {
+                    final errorLabel = context.read<TextFieldController>();
+                    if (errorLabel.errorInput != '') {
+                      errorLabel.clearErrorMenssage();
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: AppColors.blue,
+                  ))
+            ],
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -27,7 +47,7 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                 return Column(
                   children: [
                     TextFormField(
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.blue),
                       controller: workspaceInput,
                       decoration: InputDecoration(
                         errorText: errorValue.errorInput['name'] == ''
@@ -40,7 +60,8 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                           fontWeight: FontWeight.w300,
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                            borderRadius: BorderRadius.circular(
+                                AppMeasures.borderRadius)),
                       ),
                     ),
                     const SizedBox(
@@ -51,7 +72,6 @@ Future<void> addWorkspaceDialog(BuildContext context) {
               }),
               const SizedBox(height: 40),
               Row(
-                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
@@ -60,13 +80,14 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                              borderRadius: BorderRadius.circular(
+                                  AppMeasures.borderRadius)),
                           backgroundColor: AppColors.blue,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Criar',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 52, 52, 52),
+                              color: AppColors.grey,
                               fontSize: 20,
                               fontWeight: FontWeight.w300),
                         ),
@@ -95,31 +116,6 @@ Future<void> addWorkspaceDialog(BuildContext context) {
                   ),
                   const SizedBox(
                     width: 15,
-                  ),
-                  SizedBox(
-                    height: 54,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(color: AppColors.blue),
-                              borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-                          backgroundColor: AppColors.grey,
-                        ),
-                        child: const Text(
-                          'Cancelar',
-                          style: TextStyle(
-                              color: Color(0xFF7398C8),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300),
-                        ),
-                        onPressed: () {
-                          final errorLabel =
-                              context.read<TextFieldController>();
-                          if (errorLabel.errorInput != '') {
-                            errorLabel.clearErrorMenssage();
-                          }
-                          Navigator.of(context).pop();
-                        }),
                   ),
                 ],
               ),

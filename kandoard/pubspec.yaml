@@ -40,6 +40,8 @@ dependencies:
   dio: ^5.4.0
   jwt_decoder: ^2.0.1
   date_time_picker: ^2.1.0
+  fl_chart: ^0.66.2
+
 
 
 dev_dependencies:

@@ -5,7 +5,7 @@ import 'package:kandoard/provider/board_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
-import '../components/card/board_card.dart';
+import '../components/board_card.dart';
 
 class WorkspaceView extends StatefulWidget {
   const WorkspaceView({super.key});

@@ -48,7 +48,7 @@ class CardService {
           .post('https://kanbanboard-nj8m.onrender.com/api/card', data: {
         'columnId': columnId,
         'description': cardDescription,
-        // 'dueDate': cardDueDate,
+        'dueDate': cardDueDate,
         'comments': cardComments,
         'priority': cardPriority,
         'title': cardTitle,

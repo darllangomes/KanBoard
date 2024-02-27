@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kandoard/components/card/delete_card_dialog.dart';
 import 'package:kandoard/model/card_model.dart';
-import 'package:kandoard/provider/column_provider.dart';
-import 'package:provider/provider.dart';
-
 import '../../shared/app_colors.dart';
 import '../../shared/app_measures.dart';
 
@@ -17,6 +14,7 @@ Future<void> viewCardContent(context, {required CardModel card}) {
                 borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
             content: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,6 +56,13 @@ Future<void> viewCardContent(context, {required CardModel card}) {
                   ),
                   Text(
                     "Prioridade: ${card.getcardPriority}",
+                    style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  Text(
+                    "Entrega: ${card.getcardDueDate}",
                     style: TextStyle(
                         color: AppColors.blue,
                         fontSize: 16,

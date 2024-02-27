@@ -1,9 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:kandoard/controller/textfield_controller.dart';
-import 'package:kandoard/model/card_model.dart';
 import 'package:kandoard/provider/column_provider.dart';
-import 'package:kandoard/provider/user_provider.dart';
 import 'package:kandoard/shared/app_colors.dart';
 import 'package:kandoard/shared/app_measures.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +13,9 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
 
   Map<String, String> members = {
     '': '',
-    'Djavan': '1',
-    'João': '2',
-    'Vitoria': '3'
+    // 'Djavan': '1',
+    // 'João': '2',
+    // 'Vitoria': '3'
   };
   String cardMember = '';
   Map<String, String> priorities = {
@@ -240,9 +238,10 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                               // TODO: Criar lógica de criar um card e adicionar na coluna
 
                               //TODO: adicionar os membros
-                              final date = DateTime.parse(cardFinalDate.text)
-                                  .toIso8601String();
+                              final date = '${DateTime.parse(cardFinalDate.text)
+                                  .toIso8601String()}Z';
 
+                              print(date);
                               newCard.addNewCardToColumn(
                                   columnId: columnId,
                                   description: cardDescription.text,

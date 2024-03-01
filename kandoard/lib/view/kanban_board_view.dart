@@ -40,24 +40,32 @@ class _KanbanBoardState extends State<KanbanBoardView> {
     return Scaffold(
       backgroundColor: AppColors.grey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.grey),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
-        actionsIconTheme: const IconThemeData(),
-        title: Text(
-          boardContent.boardName,
-          style: TextStyle(
-              color: AppColors.grey,
-              fontSize: 24,
-              fontWeight: FontWeight.w200,
-              fontStyle: FontStyle.italic),
-        ),
-        backgroundColor: AppColors.blue,
-        actions: [IconButton(onPressed: (){Navigator.pushNamed(context, '/charts');}, icon: Icon(Icons.bar_chart, color: AppColors.grey,))]
-      ),
+          iconTheme: IconThemeData(color: AppColors.grey),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back)),
+          actionsIconTheme: const IconThemeData(),
+          title: Text(
+            boardContent.boardName,
+            style: TextStyle(
+                color: AppColors.grey,
+                fontSize: 24,
+                fontWeight: FontWeight.w200,
+                fontStyle: FontStyle.italic),
+          ),
+          backgroundColor: AppColors.blue,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/charts');
+                },
+                icon: Icon(
+                  Icons.bar_chart,
+                  color: AppColors.grey,
+                ))
+          ]),
       body: Column(
         children: [
           Padding(
@@ -168,7 +176,26 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                               ),
                                               IconButton(
                                                   onPressed: () async {
-                                                    addCardDialog(context, columns[index].getColumnId);
+                                                    if (columns[index]
+                                                            .columnWip <=
+                                                        columns[index]
+                                                            .cards
+                                                            .length) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        const SnackBar(
+                                                          content: Text(
+                                                              'Limite de cards da coluna atingido.'),
+                                                        ),
+                                                      );
+                                                      return;
+                                                    } else {
+                                                      addCardDialog(
+                                                          context,
+                                                          columns[index]
+                                                              .getColumnId);
+                                                    }
                                                   },
                                                   icon: Icon(
                                                     Icons.add_box_outlined,
@@ -190,7 +217,10 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                   final cards =
                                                       columns[index].cards;
                                                   return Card(
-                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(AppMeasures
+                                                                  .borderRadius)),
                                                       color: cardColor(
                                                           cards[indexCard]
                                                               .cardPriority),
@@ -199,7 +229,12 @@ class _KanbanBoardState extends State<KanbanBoardView> {
                                                       child: InkWell(
                                                         onTap: () {
                                                           //TODO: abrir tela que mostra as informacoes do card, e as opçoes de editar e excluir
-                                                          viewCardContent(context, card: columns[index].cards[indexCard]);
+                                                          viewCardContent(
+                                                              context,
+                                                              card: columns[
+                                                                          index]
+                                                                      .cards[
+                                                                  indexCard]);
                                                           print('Clicado');
                                                         },
                                                         onLongPress: () {

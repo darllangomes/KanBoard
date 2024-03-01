@@ -32,27 +32,25 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
           backgroundColor: AppColors.grey,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppMeasures.borderRadius)),
-              title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Adicionar Cartão',
-                          style:
-                              TextStyle(color: AppColors.blue, fontSize: 20)),
-                          IconButton(
-                              onPressed: () {
-                                 final errorLabel =
-                                context.read<TextFieldController>();
-                            if (errorLabel.errorInput != '') {
-                              errorLabel.clearErrorMenssage();
-                            }
-                            Navigator.of(context).pop();
-                              },
-                              icon: Icon(
-                                Icons.close,
-                                color: AppColors.blue,
-                              ))
-                        ],
-                      ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Adicionar Cartão',
+                  style: TextStyle(color: AppColors.blue, fontSize: 20)),
+              IconButton(
+                  onPressed: () {
+                    final errorLabel = context.read<TextFieldController>();
+                    if (errorLabel.errorInput != '') {
+                      errorLabel.clearErrorMenssage();
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: AppColors.blue,
+                  ))
+            ],
+          ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -62,7 +60,6 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                     builder: (context, errorValue, child) {
                   return Column(
                     children: [
-
                       TextFormField(
                         style: TextStyle(color: AppColors.blue),
                         controller: cardTitle,
@@ -175,7 +172,7 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                         type: DateTimePickerType.date,
                         dateMask: 'yyyy-MM-dd',
                         controller: cardFinalDate,
-                        firstDate: DateTime(2000),
+                        firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
                         icon: const Icon(Icons.event),
                         dateLabelText: 'Data de entrega',
@@ -200,12 +197,10 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                 }),
                 const SizedBox(height: 40),
                 Row(
-                  
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
                       height: 54,
-                 
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -238,8 +233,8 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                               // TODO: Criar lógica de criar um card e adicionar na coluna
 
                               //TODO: adicionar os membros
-                              final date = '${DateTime.parse(cardFinalDate.text)
-                                  .toIso8601String()}Z';
+                              final date =
+                                  '${DateTime.parse(cardFinalDate.text).toIso8601String()}Z';
 
                               print(date);
                               newCard.addNewCardToColumn(
@@ -256,7 +251,6 @@ Future<void> addCardDialog(BuildContext context, String columnId) {
                     const SizedBox(
                       width: 15,
                     ),
-                    
                   ],
                 ),
               ],
